@@ -287,7 +287,7 @@
                   <Color blue="0" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="73">
+                  <StringArray count="123">
                     <StringItem index="0" value="18"/>
                     <StringItem index="1" value="19"/>
                     <StringItem index="2" value="20"/>
@@ -361,6 +361,56 @@
                     <StringItem index="70" value="88"/>
                     <StringItem index="71" value="89"/>
                     <StringItem index="72" value="90"/>
+                    <StringItem index="73" value="91"/>
+                    <StringItem index="74" value="92"/>
+                    <StringItem index="75" value="93"/>
+                    <StringItem index="76" value="94"/>
+                    <StringItem index="77" value="95"/>
+                    <StringItem index="78" value="96"/>
+                    <StringItem index="79" value="97"/>
+                    <StringItem index="80" value="98"/>
+                    <StringItem index="81" value="99"/>
+                    <StringItem index="82" value="100"/>
+                    <StringItem index="83" value="101"/>
+                    <StringItem index="84" value="102"/>
+                    <StringItem index="85" value="103"/>
+                    <StringItem index="86" value="104"/>
+                    <StringItem index="87" value="105"/>
+                    <StringItem index="88" value="106"/>
+                    <StringItem index="89" value="107"/>
+                    <StringItem index="90" value="108"/>
+                    <StringItem index="91" value="109"/>
+                    <StringItem index="92" value="110"/>
+                    <StringItem index="93" value="111"/>
+                    <StringItem index="94" value="112"/>
+                    <StringItem index="95" value="113"/>
+                    <StringItem index="96" value="114"/>
+                    <StringItem index="97" value="115"/>
+                    <StringItem index="98" value="116"/>
+                    <StringItem index="99" value="117"/>
+                    <StringItem index="100" value="118"/>
+                    <StringItem index="101" value="119"/>
+                    <StringItem index="102" value="120"/>
+                    <StringItem index="103" value="121"/>
+                    <StringItem index="104" value="122"/>
+                    <StringItem index="105" value="123"/>
+                    <StringItem index="106" value="124"/>
+                    <StringItem index="107" value="125"/>
+                    <StringItem index="108" value="126"/>
+                    <StringItem index="109" value="127"/>
+                    <StringItem index="110" value="128"/>
+                    <StringItem index="111" value="129"/>
+                    <StringItem index="112" value="130"/>
+                    <StringItem index="113" value="131"/>
+                    <StringItem index="114" value="132"/>
+                    <StringItem index="115" value="133"/>
+                    <StringItem index="116" value="134"/>
+                    <StringItem index="117" value="135"/>
+                    <StringItem index="118" value="136"/>
+                    <StringItem index="119" value="137"/>
+                    <StringItem index="120" value="138"/>
+                    <StringItem index="121" value="139"/>
+                    <StringItem index="122" value="140"/>
                   </StringArray>
                 </Property>
               </Properties>
