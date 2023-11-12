@@ -35,6 +35,17 @@ public class candidates {
         this.party = party;
     }
 
+    public candidates(int id, String name, String last_name, String second_name, int id_number, int age, String photo, String party) {
+        this.id = id;
+        this.name = name;
+        this.last_name = last_name;
+        this.second_name = second_name;
+        this.id_number = id_number;
+        this.age = age;
+        this.photo = photo;
+        this.party = party;
+    }
+
    
   
 
