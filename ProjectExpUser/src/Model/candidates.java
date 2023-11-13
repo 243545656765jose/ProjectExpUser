@@ -9,11 +9,11 @@ public class candidates {
     private String second_name;
     private int id_number;
     private int age;
-    private String photo;
+    private byte[] photo;
     private String party;
     private int votes;
 
-    public candidates(int id, String name, String last_name, String second_name, int id_number, int age, String photo, String party, int votes) {
+    public candidates(int id, String name, String last_name, String second_name, int id_number, int age, byte[] photo, String party, int votes) {
         this.id = id;
         this.name = name;
         this.last_name = last_name;
@@ -25,7 +25,7 @@ public class candidates {
         this.votes = votes;
     }
 
-    public candidates(String name, String last_name, String second_name, int id_number, int age, String photo, String party) {
+    public candidates(String name, String last_name, String second_name, int id_number, int age, byte[] photo, String party) {
         this.name = name;
         this.last_name = last_name;
         this.second_name = second_name;
@@ -35,7 +35,7 @@ public class candidates {
         this.party = party;
     }
 
-    public candidates(int id, String name, String last_name, String second_name, int id_number, int age, String photo, String party) {
+    public candidates(int id, String name, String last_name, String second_name, int id_number, int age, byte[] photo, String party) {
         this.id = id;
         this.name = name;
         this.last_name = last_name;
@@ -136,14 +136,14 @@ public class candidates {
     /**
      * @return the photo
      */
-    public String getPhoto() {
+    public byte[] getPhoto() {
         return photo;
     }
 
     /**
      * @param photo the photo to set
      */
-    public void setPhoto(String photo) {
+    public void setPhoto(byte[] photo) {
         this.photo = photo;
     }
 

@@ -610,13 +610,13 @@ public class Administrator extends javax.swing.JFrame {
 
         tblCandidation.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "id", "Cedula", "Nombre", "Primer Apellido", "Segundo Apellido", "Foto", "Edad", "Partido Politico"
+                "id", "Cedula", "Nombre", "Primer Apellido", "Segundo Apellido", "Edad", "Partido Politico"
             }
         ));
         tblCandidation.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -670,8 +670,10 @@ public class Administrator extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void btnAddressPhotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddressPhotoActionPerformed
-        // TODO add your handling code here:
-        this.ctrlCandidate.addImage(txtAdrresPhoto, lblImageCand);
+        // TODO add your andling code here:
+       byte[]  photo =this.ctrlCandidate.selectImage(txtAdrresPhoto);
+       this.ctrlCandidate.setImageInLabel(photo, lblImageCand);
+
     }//GEN-LAST:event_btnAddressPhotoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
