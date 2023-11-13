@@ -66,7 +66,6 @@ public class candidateDAO {
             ps.setInt(7, cand.getId_number());
             ps.setInt(8, cand.getId());
             ps.execute();
-            JOptionPane.showMessageDialog(null, "Se insertó correctamente el candidato");
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "No se insertó correctamente el candidato, error: " + e.toString());
             System.err.println(e);
