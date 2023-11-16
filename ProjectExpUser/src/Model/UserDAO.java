@@ -7,13 +7,39 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 
 public class UserDAO {
    
     public UserDAO() {
     }
+    
+    // Agrega un nuevo usuario con un rol de votante a la base de datos.
+public void createVoter(User user) {
+    DBConnection db = new DBConnection();
+    String consultaSQL = "INSERT INTO users (name, last_name, secund_name, id_number, age, address, password, rol_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    
+    try {
+        PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
+        ps.setString(1, user.getName());
+        ps.setString(2, user.getLast_name());
+        ps.setString(3, user.getSecund_name());
+        ps.setInt(4, user.getId_number());
+        ps.setInt(5, user.getAge());
+        ps.setString(6, user.getAddress());
+        ps.setString(7, user.getPassword());
+        // Asigna el rol de votante (puedes ajustar el ID según la estructura de tu base de datos).
+        ps.setInt(8, 2); // Supongamos que el ID del rol de votante es 2.
+        
+        ps.execute();
+        JOptionPane.showMessageDialog(null, "Se insertó correctamente el usuario como votante");
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "No se insertó correctamente el usuario, error: " + e.toString());
+    } finally {
+        db.disconnect();
+    }
+}
+
 
     /*Creates a new user record in the database.
      The User object containing user information to be inserted.*/
@@ -30,7 +56,7 @@ public class UserDAO {
             ps.setInt(5, User.getAge());
             ps.setString(6, User.getAddress());
             ps.setString(7, User.getPassword());
-            ps.setInt(8, User.getRol_id());
+            ps.setString(8, User.getRol_id());
             ps.execute();
             JOptionPane.showMessageDialog(null, "Se insertó correctamente el usuario ");
         } catch (SQLException e) {
@@ -63,8 +89,8 @@ public class UserDAO {
                 int age = resultSet.getInt("age");
                 String address = resultSet.getString("address");
                 String password = resultSet.getString("password");
-                int rol_id = resultSet.getInt("rol_id");
-                Users.add(new User(name, last_name,secund_name, id_number, age,address,password,rol_id));
+                String rol_id = resultSet.getString("rol_id");
+                Users.add(new User(id,name, last_name,secund_name, id_number, age,address,password,rol_id));
             }
         } catch (SQLException e) {
             System.err.println("Error: " + e.getMessage());
@@ -87,10 +113,11 @@ public class UserDAO {
             ps.setString(2, User.getLast_name());
             ps.setString(3, User.getSecund_name());
             ps.setInt(4, User.getId_number());            
-            ps.setInt(6, User.getAge());
-            ps.setString(7, User.getAddress());
-            ps.setString(5, User.getPassword());
-            ps.setInt(8, User.getRol_id());
+            ps.setInt(5, User.getAge());
+            ps.setString(6, User.getAddress());
+            ps.setString(7, User.getPassword());
+            ps.setString(8, User.getRol_id());
+            ps.setInt(9, User.getId());
             ps.executeUpdate();  // Utiliza executeUpdate en lugar de execute para sentencias de actualización.
 
             JOptionPane.showMessageDialog(null, "Modificación Exitosa");
@@ -123,8 +150,7 @@ public class UserDAO {
         }
     }
     
-    //Reorganizes user IDs in the database to ensure they are sequential starting from 1.
-    public void reorganizarIDs() {
+     public void reorganizarIDs() {
         DBConnection db = new DBConnection();
 
         // Consulta SQL para obtener todos los IDs de los estudiantes ordenados
@@ -151,11 +177,10 @@ public class UserDAO {
         } finally {
             db.disconnect();
         }
-    }
-    
+    }   
     
     //Retrieves a User object from the database based on the provided username.
-   /* public User getUserByUsername(String username) {
+    public User getUserByUsername(String username) {
     DBConnection db = new DBConnection();
     User user = null;
     String sql = "SELECT * FROM users WHERE name = ?";
@@ -174,8 +199,8 @@ public class UserDAO {
             int age = resultSet.getInt("age");
             String address = resultSet.getString("address");
             String password = resultSet.getString("password");
-            int rol_id = resultSet.getInt("rol_id");
-            user = new User(name, last_name, secund_name, id, id_number, age, address);
+            String rol_id = resultSet.getString("rol_id");
+            user = new User(id, name, last_name, secund_name,  id_number, age, address, password,rol_id);
         }
     } catch (SQLException e) {
         System.err.println("Error: " + e.getMessage());
@@ -184,5 +209,5 @@ public class UserDAO {
     }
     
     return user;
-}*/
+}
 }

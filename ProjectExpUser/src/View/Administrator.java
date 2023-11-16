@@ -36,7 +36,9 @@ public class Administrator extends javax.swing.JFrame {
         this.CU.loadRole(cbxRolVot, isAdmin, isVotante);
     }
     
-    
+    public void clear (){   
+        this.CU.clearFields(txtNameVot, txtLastNameVot, txtSecundNameVot, txtIdentificationVot, txtAddressVot, txtPasswordVot);
+        }
 
    
     @SuppressWarnings("unchecked")
@@ -212,10 +214,20 @@ public class Administrator extends javax.swing.JFrame {
         jButton5.setBackground(new java.awt.Color(0, 153, 153));
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Image/icons8-editar-25.png"))); // NOI18N
         jButton5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setBackground(new java.awt.Color(153, 51, 0));
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Image/icons8-eliminar-25.png"))); // NOI18N
         jButton6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -331,9 +343,31 @@ public class Administrator extends javax.swing.JFrame {
             new String [] {
                 "ID", "Nombre", "Primer Apellido", "Segundo Apellido", "Cedula", "Edad", "Direccion", "Contraseña", "Rol"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblVotantes.setOpaque(false);
         tblVotantes.setSelectionBackground(new java.awt.Color(255, 255, 255));
+        tblVotantes.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                tblVotantesAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        tblVotantes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblVotantesMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblVotantes);
 
         javax.swing.GroupLayout plVotersLayout = new javax.swing.GroupLayout(plVoters);
@@ -710,7 +744,7 @@ public class Administrator extends javax.swing.JFrame {
 
     private void tblCandidationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCandidationMouseClicked
         // TODO add your handling code here:
-        this.ctrlCandidate.selectedRowCandidates(tblCandidation, txtName, txtLastName, txtSecondName, txtAdrresPhoto, lblImageCand, txtIPoliticParty, cbxAgeVot,txtIdentification );
+        this.ctrlCandidate.selectedRowCandidates(tblCandidation, txtName, txtLastName, txtSecondName, txtAdrresPhoto, lblImageCand, txtIPoliticParty, cbxAgeCand,txtIdentification );
     }//GEN-LAST:event_tblCandidationMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -722,9 +756,34 @@ public class Administrator extends javax.swing.JFrame {
 
     private void btnAddVotanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddVotanteActionPerformed
         // TODO add your handling code here:
-      this.CU.addUser(txtNameVot, txtLastNameVot, txtSecundNameVot, txtIdentificationVot, cbxAgeVot, txtAddressVot, txtPasswordVot);
+      this.CU.addUser(txtNameVot, txtLastNameVot, txtSecundNameVot, txtIdentificationVot, cbxAgeVot, txtAddressVot, txtPasswordVot,cbxRolVot);
+      this.clear();
       this.loadDataUsers();
     }//GEN-LAST:event_btnAddVotanteActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        this.CU.deleteUser();
+        this.clear();
+        this.loadDataUsers();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        this.CU.upDatauSERS(txtNameVot, txtLastNameVot, txtSecundNameVot, txtIdentificationVot, cbxAgeVot, txtAddressVot, txtPasswordVot,cbxRolVot);
+        this.clear();
+        this.CU.loadDataUser(tblVotantes);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void tblVotantesAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tblVotantesAncestorAdded
+        // TODO add your handling code here:
+   
+    }//GEN-LAST:event_tblVotantesAncestorAdded
+
+    private void tblVotantesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVotantesMouseClicked
+        // TODO add your handling code here:
+            this.CU.selectedRow(tblVotantes, txtNameVot, txtLastNameVot, txtSecundNameVot, txtIdentificationVot, cbxAgeVot, txtAddressVot, txtPasswordVot, cbxRolVot);
+    }//GEN-LAST:event_tblVotantesMouseClicked
 
     /**
      * @param args the command line arguments

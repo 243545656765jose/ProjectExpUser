@@ -22,7 +22,7 @@ public class CTRLUser {
     UserDAO ud = new UserDAO();
     RolDAO rd = new RolDAO();
     int id;
-    int RolID;
+    int RoleID;
     
     
     //Loads user data into a JTable from a database and displays it.
@@ -44,15 +44,14 @@ public class CTRLUser {
                 user.getAge(),
                 user.getAddress(),
                 user.getPassword(),
-                this.rd.getNameRole(user.getRol_id())
+                user.getRol_id()
             };
             model.addRow(row);
         }
-    }
- 
-       
+    }   
+    
     //Adds a new user to the database based on the input from text fields.
-    public void addUser(JTextField name, JTextField last_name, JTextField secund_name, JTextField id_number, JComboBox age, JTextField address, JTextField password) {
+    public void addUser(JTextField name, JTextField last_name, JTextField secund_name, JTextField id_number, JComboBox age, JTextField address, JTextField password, JComboBox rol_id) {
         //Validaciones aqui
         String Name = name.getText();
         String Last_name = last_name.getText();
@@ -61,29 +60,18 @@ public class CTRLUser {
         String Age = age.getSelectedItem().toString();
         String Address = address.getText();
         String Password = password.getText();
+        String Rol_id = rol_id.getSelectedItem().toString();
 
-       
-        this.ud.create(new User(name.getText(), last_name.getText(), secund_name.getText(), Integer.parseInt(id_number.getText()), Integer.parseInt(age.getSelectedItem().toString()), address.getText(), password.getText(), this.RolID));
+
+        this.ud.create(new User(name.getText(), last_name.getText(), secund_name.getText(), Integer.parseInt(id_number.getText()), Integer.parseInt(age.getSelectedItem().toString()), address.getText(), password.getText(), rol_id.getSelectedItem().toString()));
         this.ud.reorganizarIDs();
-
     }
 
-    
-    //Updates an existing user's information in the database based on input from text fields.
-    /*public void updateUser(JTextField name, JTextField first_name, JTextField second_name, JTextField email, JTextField password) {
-        //Validaciones aqui
-        JTextField[] campos = {name, first_name, second_name, email, password};
-        String Name = name.getText();
-        String First_name = first_name.getText();
-        String Second_name = second_name.getText();
-        String Email = email.getText();
-        String Password = password.getText();
-
-       
-        this.ud.update(new User(this.id, name.getText(), first_name.getText(), second_name.getText(), email.getText(), password.getText(),  this.RolID));
+    public void upDatauSERS(JTextField txtNameVot, JTextField txtLastNameVot, JTextField txtSecundNameVot, JTextField txtIdentificationVot, JComboBox cbxAgeVot, JTextField txtAddressVot, JTextField txtPasswordVot, JComboBox rol_id) {
+        
+        this.ud.update(new User(id, txtNameVot.getText(), txtLastNameVot.getText(), txtSecundNameVot.getText(), Integer.parseInt(txtIdentificationVot.getText()), Integer.parseInt(cbxAgeVot.getSelectedItem().toString()), txtAddressVot.getText(), txtPasswordVot.getText(), rol_id.getSelectedItem().toString()));
         this.ud.reorganizarIDs();
-
-    }*/
+    }   
     
     //Deletes the current user from the database and reorganizes user IDs.
     public void deleteUser(){
@@ -92,7 +80,7 @@ public class CTRLUser {
     }
     
     //Populates input fields and combo boxes with data from the selected row in the JTable.
-    public void selectedRow(JTable table, JTextField name, JTextField last_name, JTextField secund_name, JTextField id_number, JComboBox age, JTextField address, JTextField password) {
+    public void selectedRow(JTable table, JTextField name, JTextField last_name, JTextField secund_name, JTextField id_number, JComboBox age, JTextField address, JTextField password, JComboBox rol_id) {
         try {
             int row = table.getSelectedRow();
             if (row >= 0) {
@@ -101,30 +89,33 @@ public class CTRLUser {
                 last_name.setText((table.getValueAt(row, 2).toString()));
                 secund_name.setText((table.getValueAt(row, 3).toString()));
                 id_number.setText((table.getValueAt(row, 4).toString()));
-                password.setText((table.getValueAt(row, 5).toString()));
+                age.setSelectedItem(table.getValueAt(row, 5).toString());
+                address.setText(table.getValueAt(row, 6).toString());
+                password.setText((table.getValueAt(row, 7).toString()));
+                rol_id.setSelectedItem((table.getValueAt(row, 8).toString()));
             } else {
                 JOptionPane.showMessageDialog(null, "Fila no seleccionada");
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error de seleccion, error: " + e.toString());
+            
+            System.out.println(e.toString());
         }
     }
     
     //Clears the content of the provided text fields
-    public void clearFields(JTextField name, JTextField last_name, JTextField secund_name, JTextField id_number,JTextField address, JTextField password) {
+    public void clearFields(JTextField name, JTextField last_name, JTextField secund_name, JTextField id_number, JTextField address, JTextField password) {
         name.setText("");
         last_name.setText("");
         secund_name.setText("");
         id_number.setText("");
-        address.getText();
+        address.setText("");
         password.setText("");
     }
     
-    
-
    //his method is used to get the ID of the selected role in the JComboBox. 
     public void getIdRole(JComboBox role) {
-        this.RolID = this.rd.getIDRole(role.getSelectedItem().toString());
+        this.RoleID = this.rd.getIDRole(role.getSelectedItem().toString());
     }
 
     //This method loads roles into the JComboBox

@@ -1,4 +1,3 @@
-
 package Model;
 
 
@@ -12,12 +11,12 @@ public class User {
     private int age;
     private String address;
     private String password;
-    private int rol_id;
+    private String rol_id;
     
     
     public User(){}
 
-    public User(int id, String name, String last_name, String secund_name, int id_number, int age, String address, String password, int rol_id) {
+    public User(int id, String name, String last_name, String secund_name, int id_number, int age, String address, String password, String rol_id) {
         this.id = id;
         this.name = name;
         this.last_name = last_name;
@@ -31,7 +30,7 @@ public class User {
 
     
 
-    public User(String name, String last_name, String secund_name, int id_number, int age, String address, String password, int rol_id) {
+    public User(String name, String last_name, String secund_name, int id_number, int age, String address, String password, String rol_id) {
         this.name = name;
         this.last_name = last_name;
         this.secund_name = secund_name;
@@ -160,14 +159,14 @@ public class User {
     /**
      * @return the rol_id
      */
-    public int getRol_id() {
+    public String getRol_id() {
         return rol_id;
     }
 
     /**
      * @param rol_id the rol_id to set
      */
-    public void setRol_id(int rol_id) {
+    public void setRol_id(String rol_id) {
         this.rol_id = rol_id;
     }
     
