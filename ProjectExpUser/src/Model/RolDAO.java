@@ -1,4 +1,3 @@
-
 package Model;
 
 import java.sql.PreparedStatement;
@@ -8,12 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 import Model.Rol;
 
-
 public class RolDAO {
-    
-    public RolDAO(){}
-    
-     public List<Rol> read() {
+
+    public RolDAO() {
+    }
+
+    public List<Rol> read() {
 
         DBConnection db = new DBConnection();
         List<Rol> Roles = new ArrayList<>();
@@ -35,7 +34,7 @@ public class RolDAO {
         return Roles;
     }
 
-     public int getIDRole(String name) {
+    public int getIDRole(String name) {
         int value = 0;
         DBConnection db = new DBConnection();
         String sql = "SELECT id FROM roles WHERE name = ?";
@@ -72,20 +71,23 @@ public class RolDAO {
         }
         return value;
     }
+
+    public String determineRole(String user, String pasword) {
+        DBConnection db = new DBConnection();
+        String rol = "";
+        try {
+            PreparedStatement ps = db.getConnection().prepareStatement("SELECT rol_id FROM users WHERE id_number = ? AND password = ?");
+            ps.setString(1, user);
+            ps.setString(2, pasword);
+            ResultSet resultSet = ps.executeQuery();
+            while (resultSet.next()) {
+                rol = resultSet.getString("rol_id");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error: " + e.getMessage());
+        } finally {
+            db.disconnect();
+        }
+        return rol;
+    }
 }
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-

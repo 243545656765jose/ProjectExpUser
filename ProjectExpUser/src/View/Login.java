@@ -1,11 +1,14 @@
 
 package View;
 
+import Controller.CTRLrole;
+
 
 public class Login extends javax.swing.JFrame {
     Administrator adm = new Administrator();
     InterfaceUser user = new InterfaceUser();
     Registration rg = new Registration();
+    CTRLrole ctrlRole= new CTRLrole();
   
     public Login() {
         this.setUndecorated(true);
@@ -35,19 +38,16 @@ public class Login extends javax.swing.JFrame {
         setTitle("Votaciones Nacionales");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Cedula");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 234, 76, -1));
 
-        txtIdentification.setBackground(new java.awt.Color(255, 255, 255));
-        txtIdentification.setForeground(new java.awt.Color(0, 0, 0));
         txtIdentification.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         txtIdentification.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -56,18 +56,16 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel2.add(txtIdentification, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 277, 209, 28));
 
-        txtPassword.setBackground(new java.awt.Color(255, 255, 255));
-        txtPassword.setForeground(new java.awt.Color(0, 0, 0));
         txtPassword.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         jPanel2.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 389, 209, 29));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Contraseña");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 346, 103, -1));
 
         jButton1.setBackground(new java.awt.Color(0, 153, 51));
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Iniciar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,7 +75,7 @@ public class Login extends javax.swing.JFrame {
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 446, 209, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Crear un nuevo usuario");
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -87,9 +85,9 @@ public class Login extends javax.swing.JFrame {
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(231, 697, 142, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Votaciones Nacionales  de Costa Rica ");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 163, -1, 30));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, -1, 30));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(204, 0, 0));
@@ -129,21 +127,12 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-       
-        switch( txtPassword.getText()){
-            case "1":
-                adm.setVisible(true);
-                dispose();break;
-            case "2":
-                user.setVisible(true);
-                dispose();break;
-        
-        }
+        this.ctrlRole.Enter_Interface(txtIdentification.getText(), txtPassword.getText(),user,adm);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         // TODO add your handling code here:
-        this.dispose();
+        dispose();
         rg.setVisible(true);
     }//GEN-LAST:event_jLabel5MouseClicked
 

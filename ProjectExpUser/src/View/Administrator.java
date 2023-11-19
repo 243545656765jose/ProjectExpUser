@@ -31,7 +31,7 @@ public class Administrator extends javax.swing.JFrame {
     }
     
     private void cbxRoles() {
-        boolean isAdmin = false; // Puedes ajustar este valor según tus necesidades.
+        boolean isAdmin = true; 
         boolean isVotante = true;
         this.CU.loadRole(cbxRolVot, isAdmin, isVotante);
     }
@@ -76,7 +76,7 @@ public class Administrator extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         cbxRolVot = new javax.swing.JComboBox<>();
         jLabel16 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        jScrollPane3 = new javax.swing.JScrollPane();
         tblVotantes = new javax.swing.JTable();
         plPeriod = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -341,26 +341,12 @@ public class Administrator extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nombre", "Primer Apellido", "Segundo Apellido", "Cedula", "Edad", "Direccion", "Contraseña", "Rol"
+                "id", "Nombre", "Apellido1", "Apellido2", "Cedula", "Direccion", "Edad", "Contraseña", "Rol"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tblVotantes.setOpaque(false);
-        tblVotantes.setSelectionBackground(new java.awt.Color(255, 255, 255));
-        tblVotantes.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                tblVotantesAncestorAdded(evt);
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+        ));
+        tblVotantes.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                tblVotantesHierarchyChanged(evt);
             }
         });
         tblVotantes.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -368,7 +354,7 @@ public class Administrator extends javax.swing.JFrame {
                 tblVotantesMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(tblVotantes);
+        jScrollPane3.setViewportView(tblVotantes);
 
         javax.swing.GroupLayout plVotersLayout = new javax.swing.GroupLayout(plVoters);
         plVoters.setLayout(plVotersLayout);
@@ -376,19 +362,19 @@ public class Administrator extends javax.swing.JFrame {
             plVotersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(plVotersLayout.createSequentialGroup()
                 .addGap(112, 112, 112)
-                .addGroup(plVotersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 942, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addGroup(plVotersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
         plVotersLayout.setVerticalGroup(
             plVotersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(plVotersLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(87, 87, 87)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("1", plVoters);
@@ -450,29 +436,31 @@ public class Administrator extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 304, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 275, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtFinalDate, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(137, 137, 137)
+                .addGap(166, 166, 166)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel12)
                             .addComponent(jLabel13))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtFinalDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(35, Short.MAX_VALUE))
+                            .addComponent(txtFinalDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout plPeriodLayout = new javax.swing.GroupLayout(plPeriod);
@@ -480,9 +468,9 @@ public class Administrator extends javax.swing.JFrame {
         plPeriodLayout.setHorizontalGroup(
             plPeriodLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, plPeriodLayout.createSequentialGroup()
-                .addContainerGap(81, Short.MAX_VALUE)
+                .addContainerGap(142, Short.MAX_VALUE)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(173, 173, 173))
+                .addGap(112, 112, 112))
         );
         plPeriodLayout.setVerticalGroup(
             plPeriodLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -685,7 +673,7 @@ public class Administrator extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblCandidation);
 
-        plCandidate.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 390, 970, 240));
+        plCandidate.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 980, 360));
 
         jTabbedPane1.addTab("0", plCandidate);
 
@@ -775,14 +763,13 @@ public class Administrator extends javax.swing.JFrame {
         this.CU.loadDataUser(tblVotantes);
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void tblVotantesAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tblVotantesAncestorAdded
+    private void tblVotantesHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_tblVotantesHierarchyChanged
         // TODO add your handling code here:
-   
-    }//GEN-LAST:event_tblVotantesAncestorAdded
+    }//GEN-LAST:event_tblVotantesHierarchyChanged
 
     private void tblVotantesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVotantesMouseClicked
-        // TODO add your handling code here:
-            this.CU.selectedRow(tblVotantes, txtNameVot, txtLastNameVot, txtSecundNameVot, txtIdentificationVot, cbxAgeVot, txtAddressVot, txtPasswordVot, cbxRolVot);
+        // TODO add your handling code here:    
+        this.CU.selectedRow(tblVotantes, txtNameVot, txtLastNameVot, txtSecundNameVot, txtIdentificationVot, cbxAgeVot, txtAddressVot, txtPasswordVot,cbxRolVot);
     }//GEN-LAST:event_tblVotantesMouseClicked
 
     /**
@@ -828,7 +815,7 @@ public class Administrator extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblAge;
     private javax.swing.JPanel lblImage;

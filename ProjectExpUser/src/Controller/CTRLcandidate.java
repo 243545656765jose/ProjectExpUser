@@ -8,7 +8,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import javax.imageio.ImageIO;
@@ -26,30 +26,27 @@ public class CTRLcandidate {
         byte[] imageData = Base64.getDecoder().decode(base64String);
         this.dao.createCandidate(new candidates(txtName.getText(), txtLastName.getText(), txtSecondName.getText(), Integer.parseInt(txtIdentification.getText()), Integer.parseInt(cbxAgeCand.getSelectedItem().toString()), imageData, txtIPoliticParty.getText()));
     }
-
+    //Busca la imagen  en archivos de la pc y la agrega  a un array de byte
     public byte[] selectImage(JTextField txtPhoto) {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         int returnValue = fileChooser.showOpenDialog(null);
-
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             try {
                 File selectedFile = fileChooser.getSelectedFile();
                 BufferedImage image = ImageIO.read(selectedFile);
                 // Convertir la imagen a un arreglo de bytes
                 byte[] imageData = convertImageToByteArray(image);
-
-                // Convertir los bytes a una representación legible
                 String imageDataString = Base64.getEncoder().encodeToString(imageData);
-                txtPhoto.setText(imageDataString); // Establecer la cadena en el campo de texto
+                txtPhoto.setText(imageDataString); 
                 return imageData;
             } catch (IOException e) {
-                e.printStackTrace(); // Manejo de errores, puedes cambiar esto por un manejo adecuado de la excepción
+                e.printStackTrace();
             }
         }
         return null;
     }
-
+    //Le damos formato segun el label
     public void displayImageFromBytes(JLabel label, byte[] imageData) {
         try {
             if (imageData != null && imageData.length > 0) {
@@ -68,7 +65,7 @@ public class CTRLcandidate {
                 System.out.println("Datos de imagen vacíos o nulos");
             }
         } catch (IOException e) {
-            e.printStackTrace(); // Manejo de errores
+            e.printStackTrace();
         }
     }
 
@@ -78,7 +75,12 @@ public class CTRLcandidate {
         ImageIO.write(image, "png", baos);
         return baos.toByteArray();
     }
-
+    
+    public byte[] PhotoVoteCandidate(String name){
+       return this.dao.returnPhoto(name);
+    }
+    
+    //Agrega la imajen a un label con su tamaño respectivo
     public void setImageInLabel(byte[] imageData, JLabel label) {
         try {
             if (imageData != null && imageData.length > 0) {
@@ -93,13 +95,11 @@ public class CTRLcandidate {
                     // Establecer el ImageIcon escalado en el JLabel
                     label.setIcon(new ImageIcon(scaledImage));
                 } else {
-                    label.setIcon(null); // Si la imagen es nula, establecer el icono del JLabel como nulo
+                    label.setIcon(null);
                 }
-            } else {
-                label.setIcon(null); // Si los datos de la imagen son nulos o la matriz está vacía, establecer el icono del JLabel como nulo
-            }
+            } 
         } catch (Exception e) {
-            e.printStackTrace(); // Manejo de errores, puedes cambiar esto por un manejo adecuado de la excepción
+            e.printStackTrace();
         }
     }
 
@@ -116,8 +116,8 @@ public class CTRLcandidate {
             model.addRow(row);
         }
     }
+    
     //selects the fields from the table and sets them in the txt and lbl
-
     public void selectedRowCandidates(JTable table, JTextField name, JTextField last_Name, JTextField Second_Name, JTextField photo, JLabel lblPhoto, JTextField party, JComboBox age, JTextField id_number) {
         try {
             int row = table.getSelectedRow();
@@ -126,9 +126,7 @@ public class CTRLcandidate {
                 name.setText(table.getValueAt(row, 1).toString());
                 last_Name.setText(table.getValueAt(row, 2).toString());
                 Second_Name.setText(table.getValueAt(row, 3).toString());
-                // Obteniendo la imagen en formato Base64 desde la tabla
                 this.displayImageFromBytes(lblPhoto, dao.bitesPhoto(Integer.parseInt(table.getValueAt(row, 0).toString())));
-                // No es necesario mostrar los bytes como texto en el campo de texto 'photo'
                 party.setText(table.getValueAt(row, 6).toString());
                 age.setSelectedItem(table.getValueAt(row, 5).toString());
                 id_number.setText(table.getValueAt(row, 1).toString());
@@ -141,14 +139,32 @@ public class CTRLcandidate {
         }
     }
 
-    //Modify a candidate
+   //Modify a candidate
     public void upDataCandidate(JTextField txtName, JTextField txtLastName, JTextField txtSecondName, JTextField txtIdentification, JTextField txtAdrresPhoto, JComboBox cbxAgeCand, JTextField txtIPoliticParty) {
         String base64String = txtAdrresPhoto.getText();
         byte[] imageData = Base64.getDecoder().decode(base64String);
         this.dao.upCandidates(new candidates(this.id, txtName.getText(), txtLastName.getText(), txtSecondName.getText(), Integer.parseInt(txtIdentification.getText()), Integer.parseInt(cbxAgeCand.getSelectedItem().toString()), imageData, txtIPoliticParty.getText()));
     }
+    //Devuelve una lista de los nombre de los candidTOS
+    public List listCandidateName() {
+        List <candidates> candidate = this.dao.readCandidates();
+        List<String> NameCandidates = new ArrayList<>();
+        for (candidates cand : candidate) {
+            NameCandidates.add(cand.getName());
+        }return NameCandidates;
+    }
+    //Carga los candidatos al combobox
+    public void loadCandidates(JComboBox cbx){
+      List<String> candidatesName = this.listCandidateName();
+        for (Object Name : candidatesName) {
+            cbx.addItem(Name);
+        }
+    }
+    //Agrega un voto al candidato seleccionado
+    public void  addVote(String name){
+      this.dao.QuantityVoteCandidate(name);
+    }
     //Clear the txt and lbl fields
-
     public void cleanTexField(JTextField name, JTextField last_Name, JTextField Second_Name, JTextField photo, JLabel lblPhoto, JTextField party, JTextField id_number) {
         name.setText("");
         last_Name.setText("");

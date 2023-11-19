@@ -1,16 +1,22 @@
-
 package View;
+
+import Controller.CTRLcandidate;
+import Controller.CTRLgraphic;
 
 
 public class InterfaceUser extends javax.swing.JFrame {
 
-   
+    CTRLcandidate ctrlCandidates = new CTRLcandidate();
+    CTRLgraphic CTRLgraphic = new CTRLgraphic();
+
     public InterfaceUser() {
-         this.setUndecorated(true);
+        this.setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
+        this.ctrlCandidates.loadCandidates(cbxCandidates);
+        
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -23,8 +29,13 @@ public class InterfaceUser extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         tbOrigin = new javax.swing.JTabbedPane();
-        plVotes = new javax.swing.JPanel();
+        lblImageVote = new javax.swing.JPanel();
         srpCandidates = new javax.swing.JScrollPane();
+        lblPhotoVote = new javax.swing.JLabel();
+        cbxCandidates = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        lblNameCandidateView = new javax.swing.JLabel();
         plResult = new javax.swing.JPanel();
         plFinalResult = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -37,7 +48,7 @@ public class InterfaceUser extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(0, 204, 51));
         jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 0, 0), 1, true));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Image/icons8-elecciones-20.png"))); // NOI18N
         jLabel3.setText("Votar");
@@ -47,7 +58,7 @@ public class InterfaceUser extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Image/icons8-boleta-de-calificaciones-20.png"))); // NOI18N
         jLabel4.setText("Resultados");
@@ -83,62 +94,114 @@ public class InterfaceUser extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap(154, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel5))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addGap(42, 42, 42)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(87, 87, 87)
+                .addGap(108, 108, 108)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 475, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 0, 190, 740));
 
         tbOrigin.setTabPlacement(javax.swing.JTabbedPane.LEFT);
 
-        plVotes.setBackground(new java.awt.Color(255, 255, 255));
-        plVotes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 51, 0)));
+        lblImageVote.setBackground(new java.awt.Color(255, 255, 255));
+        lblImageVote.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 51, 0)));
 
-        javax.swing.GroupLayout plVotesLayout = new javax.swing.GroupLayout(plVotes);
-        plVotes.setLayout(plVotesLayout);
-        plVotesLayout.setHorizontalGroup(
-            plVotesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(plVotesLayout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addComponent(srpCandidates, javax.swing.GroupLayout.PREFERRED_SIZE, 1085, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(52, Short.MAX_VALUE))
-        );
-        plVotesLayout.setVerticalGroup(
-            plVotesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(plVotesLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(srpCandidates, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE)
+        srpCandidates.setViewportView(lblPhotoVote);
+
+        cbxCandidates.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxCandidatesItemStateChanged(evt);
+            }
+        });
+        cbxCandidates.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbxCandidatesMouseClicked(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setText("Candidatos");
+
+        jButton2.setBackground(new java.awt.Color(0, 204, 0));
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Votar");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        lblNameCandidateView.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblNameCandidateView.setForeground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout lblImageVoteLayout = new javax.swing.GroupLayout(lblImageVote);
+        lblImageVote.setLayout(lblImageVoteLayout);
+        lblImageVoteLayout.setHorizontalGroup(
+            lblImageVoteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lblImageVoteLayout.createSequentialGroup()
+                .addContainerGap(64, Short.MAX_VALUE)
+                .addComponent(srpCandidates, javax.swing.GroupLayout.PREFERRED_SIZE, 757, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(lblImageVoteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(lblImageVoteLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                        .addGroup(lblImageVoteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton2)
+                            .addComponent(cbxCandidates, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(40, Short.MAX_VALUE))
+                    .addGroup(lblImageVoteLayout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(lblImageVoteLayout.createSequentialGroup()
+                .addGap(340, 340, 340)
+                .addComponent(lblNameCandidateView, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+        lblImageVoteLayout.setVerticalGroup(
+            lblImageVoteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lblImageVoteLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(lblImageVoteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(srpCandidates, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(lblImageVoteLayout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbxCandidates, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblNameCandidateView, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(66, Short.MAX_VALUE))
+        );
 
-        tbOrigin.addTab("0", plVotes);
+        tbOrigin.addTab("0", lblImageVote);
 
         plResult.setBackground(new java.awt.Color(255, 255, 255));
         plResult.setForeground(new java.awt.Color(255, 255, 255));
+        plResult.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         javax.swing.GroupLayout plFinalResultLayout = new javax.swing.GroupLayout(plFinalResult);
         plFinalResult.setLayout(plFinalResultLayout);
@@ -148,34 +211,21 @@ public class InterfaceUser extends javax.swing.JFrame {
         );
         plFinalResultLayout.setVerticalGroup(
             plFinalResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 352, Short.MAX_VALUE)
+            .addGap(0, 494, Short.MAX_VALUE)
         );
+
+        plResult.add(plFinalResult, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 6, -1, -1));
 
         jButton1.setBackground(new java.awt.Color(0, 102, 0));
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Votar");
-
-        javax.swing.GroupLayout plResultLayout = new javax.swing.GroupLayout(plResult);
-        plResult.setLayout(plResultLayout);
-        plResultLayout.setHorizontalGroup(
-            plResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(plResultLayout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
-                .addGroup(plResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(plFinalResult, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-        plResultLayout.setVerticalGroup(
-            plResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(plResultLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(plFinalResult, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addContainerGap(333, Short.MAX_VALUE))
-        );
+        jButton1.setText("Graficar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        plResult.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 600, 257, -1));
 
         tbOrigin.addTab("1", plResult);
 
@@ -191,33 +241,65 @@ public class InterfaceUser extends javax.swing.JFrame {
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         // TODO add your handling code here:
-         tbOrigin.setSelectedIndex(1);
+        tbOrigin.setSelectedIndex(1);
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         // TODO add your handling code here:
         dispose();
-        Login lg  = new Login();
+        Login lg = new Login();
         lg.setVisible(true);
     }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        this.ctrlCandidates.addVote(cbxCandidates.getSelectedItem().toString());
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void cbxCandidatesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbxCandidatesMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_cbxCandidatesMouseClicked
+
+    private void cbxCandidatesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCandidatesItemStateChanged
+        // TODO add your handling code here:
+        this.ctrlCandidates.setImageInLabel(this.ctrlCandidates.PhotoVoteCandidate(cbxCandidates.getSelectedItem().toString()), lblPhotoVote);
+        lblNameCandidateView.setText(cbxCandidates.getSelectedItem().toString());
+    }//GEN-LAST:event_cbxCandidatesItemStateChanged
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // TODO add your handling code here:
+        jButton2.setVisible(false);
+        
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.CTRLgraphic.addGraph(plFinalResult, this.CTRLgraphic.addnSources1Reports2());
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cbxCandidates;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel lblImageVote;
+    private javax.swing.JLabel lblNameCandidateView;
+    private javax.swing.JLabel lblPhotoVote;
     private javax.swing.JPanel plFinalResult;
     private javax.swing.JPanel plResult;
-    private javax.swing.JPanel plVotes;
     private javax.swing.JScrollPane srpCandidates;
     private javax.swing.JTabbedPane tbOrigin;
     // End of variables declaration//GEN-END:variables
