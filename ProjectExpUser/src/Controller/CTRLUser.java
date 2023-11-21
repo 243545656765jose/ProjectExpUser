@@ -49,10 +49,11 @@ public class CTRLUser {
             model.addRow(row);
         }
     }   
-    
+            
     //Adds a new user to the database based on the input from text fields.
     public void addUser(JTextField name, JTextField last_name, JTextField secund_name, JTextField id_number, JComboBox age, JTextField address, JTextField password, JComboBox rol_id) {
-        //Validaciones aqui
+        //Validaciones aqui              
+        JTextField[] campos = {name, last_name, secund_name, id_number, address, password};
         String Name = name.getText();
         String Last_name = last_name.getText();
         String Secund_name = secund_name.getText();
@@ -62,6 +63,13 @@ public class CTRLUser {
         String Password = password.getText();
         String Rol_id = rol_id.getSelectedItem().toString();
 
+       if (ud.ValidateEmptyFields(campos)) {
+            JOptionPane.showMessageDialog(null, "Complete todos los campos.");
+            return;
+        }
+        if (!ud.validar(Name, Last_name, Secund_name, Id_number, Address, Password)) {
+            return;
+        }
 
         this.ud.create(new User(name.getText(), last_name.getText(), secund_name.getText(), Integer.parseInt(id_number.getText()), Integer.parseInt(age.getSelectedItem().toString()), address.getText(), password.getText(), rol_id.getSelectedItem().toString()));
         this.ud.reorganizarIDs();
@@ -69,7 +77,24 @@ public class CTRLUser {
 
     public void upDatauSERS(JTextField txtNameVot, JTextField txtLastNameVot, JTextField txtSecundNameVot, JTextField txtIdentificationVot, JComboBox cbxAgeVot, JTextField txtAddressVot, JTextField txtPasswordVot, JComboBox rol_id) {
         
-        this.ud.update(new User(id, txtNameVot.getText(), txtLastNameVot.getText(), txtSecundNameVot.getText(), Integer.parseInt(txtIdentificationVot.getText()), Integer.parseInt(cbxAgeVot.getSelectedItem().toString()), txtAddressVot.getText(), txtPasswordVot.getText(), rol_id.getSelectedItem().toString()));
+        JTextField[] campos = {txtNameVot, txtLastNameVot, txtSecundNameVot, txtIdentificationVot, txtAddressVot, txtPasswordVot};
+        String Name = txtPasswordVot.getText();
+        String Last_name = txtPasswordVot.getText();
+        String Secund_name = txtSecundNameVot.getText();
+        String Id_number = txtIdentificationVot.getText();
+        String Address = txtAddressVot.getText();
+        String Password = txtPasswordVot.getText();
+        String Rol_id = rol_id.getSelectedItem().toString();
+
+       if (ud.ValidateEmptyFields(campos)) {
+            JOptionPane.showMessageDialog(null, "Complete todos los campos.");
+            return;
+        }
+        if (!ud.validar(Name, Last_name, Secund_name, Id_number, Address, Password)) {
+            return;
+        }
+        
+        this.ud.update(new User(txtNameVot.getText(), txtLastNameVot.getText(), txtSecundNameVot.getText(), id, Integer.parseInt(txtIdentificationVot.getText()), txtAddressVot.getText(), txtPasswordVot.getText(), rol_id.getSelectedItem().toString()));
         this.ud.reorganizarIDs();
     }   
     

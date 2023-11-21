@@ -12,11 +12,12 @@ public class User {
     private String address;
     private String password;
     private String rol_id;
+    private String Estado;
     
     
     public User(){}
 
-    public User(int id, String name, String last_name, String secund_name, int id_number, int age, String address, String password, String rol_id) {
+    public User(int id, String name, String last_name, String secund_name, int id_number, int age, String address, String password, String rol_id, String Estado) {
         this.id = id;
         this.name = name;
         this.last_name = last_name;
@@ -26,6 +27,7 @@ public class User {
         this.address = address;
         this.password = password;
         this.rol_id = rol_id;
+        this.Estado = Estado;
     }
 
     
@@ -44,6 +46,7 @@ public class User {
  
     
 
+    
     /**
      * @return the id
      */
@@ -169,12 +172,19 @@ public class User {
     public void setRol_id(String rol_id) {
         this.rol_id = rol_id;
     }
-    
+
+    /**
+     * @return the Estado
+     */
+    public String getEstado() {
+        return Estado;
+    }
+
+    /**
+     * @param Estado the Estado to set
+     */
+    public void setEstado(String Estado) {
+        this.Estado = Estado;
+    }
     
 }
-
-
-
-
-
-

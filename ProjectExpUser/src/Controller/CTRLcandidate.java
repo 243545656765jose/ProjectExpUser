@@ -24,7 +24,24 @@ public class CTRLcandidate {
     public void SaveCandidate(JTextField txtName, JTextField txtLastName, JTextField txtSecondName, JTextField txtIdentification, JTextField txtAdrresPhoto, JComboBox cbxAgeCand, JTextField txtIPoliticParty) {
         String base64String = txtAdrresPhoto.getText();
         byte[] imageData = Base64.getDecoder().decode(base64String);
+        
+        JTextField[] campos = {txtName,txtLastName,txtSecondName,txtIdentification,txtIPoliticParty};
+        String name = txtName.getText();
+        String last_name = txtLastName.getText();
+        String second_name = txtSecondName.getText();
+        String id_number = txtIdentification.getText();
+        String party = txtIPoliticParty.getText();
+        
+        if (dao.ValidateEmptyFields(campos)) {
+            JOptionPane.showMessageDialog(null, "Complete todos los campos.");
+            return;
+        }
+        if (!dao.validar(name ,last_name ,second_name ,id_number , party)) {
+            return;
+        }
+        
         this.dao.createCandidate(new candidates(txtName.getText(), txtLastName.getText(), txtSecondName.getText(), Integer.parseInt(txtIdentification.getText()), Integer.parseInt(cbxAgeCand.getSelectedItem().toString()), imageData, txtIPoliticParty.getText()));
+ 
     }
     //Busca la imagen  en archivos de la pc y la agrega  a un array de byte
     public byte[] selectImage(JTextField txtPhoto) {
@@ -144,6 +161,22 @@ public class CTRLcandidate {
         String base64String = txtAdrresPhoto.getText();
         byte[] imageData = Base64.getDecoder().decode(base64String);
         this.dao.upCandidates(new candidates(this.id, txtName.getText(), txtLastName.getText(), txtSecondName.getText(), Integer.parseInt(txtIdentification.getText()), Integer.parseInt(cbxAgeCand.getSelectedItem().toString()), imageData, txtIPoliticParty.getText()));
+        
+        JTextField[] campos = {txtName,txtLastName,txtSecondName,txtIdentification,txtIPoliticParty};
+        String name = txtName.getText();
+        String last_name = txtLastName.getText();
+        String second_name = txtSecondName.getText();
+        String id_number = txtIdentification.getText();
+        String party = txtIPoliticParty.getText();
+        
+        if (dao.ValidateEmptyFields(campos)) {
+            JOptionPane.showMessageDialog(null, "Complete todos los campos.");
+            return;
+        }
+        if (!dao.validar(name ,last_name ,second_name ,id_number , party)) {
+            return;
+        }
+        
     }
     //Devuelve una lista de los nombre de los candidTOS
     public List listCandidateName() {

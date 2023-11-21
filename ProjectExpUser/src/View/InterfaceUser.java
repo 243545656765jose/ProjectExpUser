@@ -1,11 +1,15 @@
 package View;
 
+import Controller.CTRLUser;
 import Controller.CTRLcandidate;
 import Controller.CTRLgraphic;
+import Model.UserDAO;
 
 
 public class InterfaceUser extends javax.swing.JFrame {
 
+    UserDAO UD =new UserDAO();
+    CTRLUser CU =new CTRLUser();
     CTRLcandidate ctrlCandidates = new CTRLcandidate();
     CTRLgraphic CTRLgraphic = new CTRLgraphic();
 
@@ -34,7 +38,7 @@ public class InterfaceUser extends javax.swing.JFrame {
         lblPhotoVote = new javax.swing.JLabel();
         cbxCandidates = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnVoto = new javax.swing.JButton();
         lblNameCandidateView = new javax.swing.JLabel();
         plResult = new javax.swing.JPanel();
         plFinalResult = new javax.swing.JPanel();
@@ -137,25 +141,23 @@ public class InterfaceUser extends javax.swing.JFrame {
         });
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Candidatos");
 
-        jButton2.setBackground(new java.awt.Color(0, 204, 0));
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Votar");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnVoto.setBackground(new java.awt.Color(0, 204, 0));
+        btnVoto.setForeground(new java.awt.Color(255, 255, 255));
+        btnVoto.setText("Votar");
+        btnVoto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
+                btnVotoMouseClicked(evt);
             }
         });
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnVoto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnVotoActionPerformed(evt);
             }
         });
 
         lblNameCandidateView.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lblNameCandidateView.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout lblImageVoteLayout = new javax.swing.GroupLayout(lblImageVote);
         lblImageVote.setLayout(lblImageVoteLayout);
@@ -168,7 +170,7 @@ public class InterfaceUser extends javax.swing.JFrame {
                     .addGroup(lblImageVoteLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                         .addGroup(lblImageVoteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton2)
+                            .addComponent(btnVoto)
                             .addComponent(cbxCandidates, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(40, Short.MAX_VALUE))
                     .addGroup(lblImageVoteLayout.createSequentialGroup()
@@ -191,7 +193,7 @@ public class InterfaceUser extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cbxCandidates, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnVoto, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblNameCandidateView, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(66, Short.MAX_VALUE))
@@ -251,11 +253,11 @@ public class InterfaceUser extends javax.swing.JFrame {
         lg.setVisible(true);
     }//GEN-LAST:event_jLabel5MouseClicked
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnVotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVotoActionPerformed
         // TODO add your handling code here:
         this.ctrlCandidates.addVote(cbxCandidates.getSelectedItem().toString());
         
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnVotoActionPerformed
 
     private void cbxCandidatesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbxCandidatesMouseClicked
         // TODO add your handling code here:
@@ -268,11 +270,11 @@ public class InterfaceUser extends javax.swing.JFrame {
         lblNameCandidateView.setText(cbxCandidates.getSelectedItem().toString());
     }//GEN-LAST:event_cbxCandidatesItemStateChanged
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+    private void btnVotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVotoMouseClicked
         // TODO add your handling code here:
-        jButton2.setVisible(false);
+        btnVoto.setVisible(false);
         
-    }//GEN-LAST:event_jButton2MouseClicked
+    }//GEN-LAST:event_btnVotoMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -284,9 +286,9 @@ public class InterfaceUser extends javax.swing.JFrame {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnVoto;
     private javax.swing.JComboBox<String> cbxCandidates;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;

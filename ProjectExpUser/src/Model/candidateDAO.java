@@ -1,11 +1,13 @@
 package Model;
 
+import Controller.Validations;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 public class candidateDAO {
 
@@ -146,5 +148,41 @@ public class candidateDAO {
             db.disconnect();
         }
         return candidatesList;
+    }
+    
+    public boolean validar(String name, String last_name, String second_name, String party, String id_number) {
+    Validations validacion = new Validations();
+
+    if (!validacion.validarLetras(name)) {
+        JOptionPane.showMessageDialog(null, "Error: El nombre debe contener solo letras.");
+        return false;
+    }
+    if (!validacion.validarLetras(last_name)) {
+        JOptionPane.showMessageDialog(null, "Error: El primer apellido debe contener solo letras.");
+        return false;
+    }
+    
+    if (!validacion.validarLetras(second_name)) {
+        JOptionPane.showMessageDialog(null, "Error: El segundo apellido debe contener solo letras.");
+        return false;
+    }
+        if (!validacion.validarCedula(id_number)) {
+        JOptionPane.showMessageDialog(null, "Error: El formato de cedula es incorrecto.");
+        return false;
+    }
+    if (!validacion.validarLetras(party)) {
+        JOptionPane.showMessageDialog(null, "Error: El partido debe contener solo letras.");
+        return false;
+    }
+        return false;
+    }
+    
+    public boolean ValidateEmptyFields(JTextField[] textFields) {
+        for (JTextField textField : textFields) {
+            if (textField.getText().trim().isEmpty()) {
+                return true; 
+            }
+        }
+        return false;
     }
 }
