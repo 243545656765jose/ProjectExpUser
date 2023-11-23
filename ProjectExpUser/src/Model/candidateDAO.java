@@ -123,6 +123,20 @@ public class candidateDAO {
         }
         return cnadidates;
     }
+    //Elimina aun candidato
+     public void delete(int id) {
+        DBConnection db = new DBConnection();
+        try {
+            PreparedStatement ps = db.getConnection().prepareStatement("DELETE FROM candidates WHERE id=?");
+            ps.setInt(1, id);
+            ps.execute();
+            JOptionPane.showMessageDialog(null, "Se eliminó correctamente");
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "No se pudo eliminar, error: " + e.toString());
+        } finally {
+            db.disconnect();
+        }
+    }
     //Selecciona la cantidad de votos segun el nombre y le suma uno y lo añade a la DB
     public List<candidates> QuantityVoteCandidate(String name) {
         DBConnection db = new DBConnection();

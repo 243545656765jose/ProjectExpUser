@@ -3,12 +3,20 @@ package View;
 
 import Controller.CTRLUser;
 import Controller.CTRLcandidate;
+import Controller.CTRLperiod;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JButton;
+
 
  
 public class Administrator extends javax.swing.JFrame {
     CTRLcandidate ctrlCandidate = new CTRLcandidate();
     
     CTRLUser CU = new CTRLUser();
+    CTRLperiod CP= new CTRLperiod();
+    InterfaceUser InterFaceU = new InterfaceUser();
     /**
      * Creates new form Administrator
      */
@@ -86,8 +94,11 @@ public class Administrator extends javax.swing.JFrame {
         txtFinalDate = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
         btnAddPeriod = new javax.swing.JButton();
-        btnEditPeriod = new javax.swing.JButton();
         btnDeletePeriod = new javax.swing.JButton();
+        lblInformation = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
         plCandidate = new javax.swing.JPanel();
         lblImage = new javax.swing.JPanel();
         lblNameCan = new javax.swing.JLabel();
@@ -122,7 +133,7 @@ public class Administrator extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Image/icons8-luz-20.png"))); // NOI18N
         jLabel1.setText(" Periodo");
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -133,7 +144,7 @@ public class Administrator extends javax.swing.JFrame {
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 120, 35));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 2, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Image/icons8-elecciones-20.png"))); // NOI18N
         jLabel4.setText("Votantes");
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -144,7 +155,7 @@ public class Administrator extends javax.swing.JFrame {
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 150, 35));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 2, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Image/icons8-speaking-20.png"))); // NOI18N
         jLabel3.setText("Candidatos");
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -163,10 +174,11 @@ public class Administrator extends javax.swing.JFrame {
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 702, -1, 38));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Votaciones Nacionales");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
+        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Image/papers.co-vm29-poly-art-abstract-blue-green-pattern-41-iphone-wallpaper.jpg"))); // NOI18N
         jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 740));
 
@@ -214,6 +226,11 @@ public class Administrator extends javax.swing.JFrame {
         jButton5.setBackground(new java.awt.Color(0, 153, 153));
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Image/icons8-editar-25.png"))); // NOI18N
         jButton5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
+            }
+        });
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -380,6 +397,7 @@ public class Administrator extends javax.swing.JFrame {
         jTabbedPane1.addTab("1", plVoters);
 
         plPeriod.setBackground(new java.awt.Color(255, 255, 255));
+        plPeriod.setForeground(new java.awt.Color(0, 0, 0));
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Periodo"));
@@ -396,9 +414,11 @@ public class Administrator extends javax.swing.JFrame {
 
         btnAddPeriod.setBackground(new java.awt.Color(0, 204, 51));
         btnAddPeriod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Image/icons8-agregar-administrador-20.png"))); // NOI18N
-
-        btnEditPeriod.setBackground(new java.awt.Color(0, 153, 153));
-        btnEditPeriod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Image/icons8-editar-25.png"))); // NOI18N
+        btnAddPeriod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddPeriodActionPerformed(evt);
+            }
+        });
 
         btnDeletePeriod.setBackground(new java.awt.Color(255, 0, 0));
         btnDeletePeriod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Image/icons8-eliminar-25.png"))); // NOI18N
@@ -408,11 +428,9 @@ public class Administrator extends javax.swing.JFrame {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addContainerGap(39, Short.MAX_VALUE)
                 .addComponent(btnAddPeriod, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnEditPeriod, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGap(53, 53, 53)
                 .addComponent(btnDeletePeriod, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -422,8 +440,7 @@ public class Administrator extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnAddPeriod, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnDeletePeriod, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
-                    .addComponent(btnEditPeriod, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnDeletePeriod, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -463,21 +480,49 @@ public class Administrator extends javax.swing.JFrame {
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
+        lblInformation.setFont(new java.awt.Font("Segoe UI", 3, 36)); // NOI18N
+
+        jLabel17.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel17.setText("\"HH\": Representa la hora del día en formato de 24 horas con dos dígitos. \"mm\": Representa los minutos con dos dígitos. \"ss\": Representa los segundos con dos dígitos.");
+
+        jLabel18.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel18.setText("\"yyyy\": Representa el año con cuatro dígitos. \"MM\": Representa el mes con dos dígitos. \"dd\": Representa el día del mes con dos dígitos. \"HH\": Representa la hora del día en formato de 24 horas con dos dígitos. \"mm\": Representa los minutos con dos dígitos. \"ss\": Representa los segundos con dos dígitos.");
+
+        jLabel19.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel19.setText("yyyy-MM-dd HH:mm:ss");
+
         javax.swing.GroupLayout plPeriodLayout = new javax.swing.GroupLayout(plPeriod);
         plPeriod.setLayout(plPeriodLayout);
         plPeriodLayout.setHorizontalGroup(
             plPeriodLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, plPeriodLayout.createSequentialGroup()
-                .addContainerGap(142, Short.MAX_VALUE)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(112, 112, 112))
+                .addContainerGap(143, Short.MAX_VALUE)
+                .addGroup(plPeriodLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, plPeriodLayout.createSequentialGroup()
+                        .addGroup(plPeriodLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 719, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel17)
+                            .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(112, 112, 112))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, plPeriodLayout.createSequentialGroup()
+                        .addComponent(lblInformation, javax.swing.GroupLayout.PREFERRED_SIZE, 683, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(248, 248, 248))))
         );
         plPeriodLayout.setVerticalGroup(
             plPeriodLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(plPeriodLayout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(566, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel19)
+                .addGap(26, 26, 26)
+                .addComponent(lblInformation, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(281, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("2", plPeriod);
@@ -510,6 +555,11 @@ public class Administrator extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(0, 102, 0));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Image/icons8-agregar-administrador-20.png"))); // NOI18N
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -518,6 +568,11 @@ public class Administrator extends javax.swing.JFrame {
 
         jButton2.setBackground(new java.awt.Color(0, 153, 153));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Image/icons8-editar-25.png"))); // NOI18N
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -526,6 +581,16 @@ public class Administrator extends javax.swing.JFrame {
 
         jButton3.setBackground(new java.awt.Color(153, 51, 0));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Image/icons8-eliminar-25.png"))); // NOI18N
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -727,7 +792,7 @@ public class Administrator extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.ctrlCandidate.SaveCandidate(txtName, txtLastName, txtSecondName, txtIdentification, txtAdrresPhoto, cbxAgeCand, txtIPoliticParty);
         this.ctrlCandidate.loadDataCandidates(tblCandidation);
-        this.ctrlCandidate.cleanTexField(txtName, txtLastName, txtSecondName, txtAdrresPhoto, lblImageCand, txtIPoliticParty, txtIdentification);
+        this.ctrlCandidate.cleanTexField(txtName, txtLastName, txtSecondName, lblImageCand, txtIPoliticParty, txtIdentification);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tblCandidationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCandidationMouseClicked
@@ -736,10 +801,13 @@ public class Administrator extends javax.swing.JFrame {
     }//GEN-LAST:event_tblCandidationMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        this.ctrlCandidate.upDataCandidate(txtName, txtLastName, txtSecondName, txtIdentification, txtAdrresPhoto, cbxAgeCand, txtIPoliticParty);
-        this.ctrlCandidate.loadDataCandidates(tblCandidation);
-        this.ctrlCandidate.cleanTexField(txtName, txtLastName, txtSecondName, txtAdrresPhoto, lblImageCand, txtIPoliticParty, txtIdentification);
+        try {
+            this.ctrlCandidate.upDataCandidate(txtName, txtLastName, txtSecondName, txtIdentification,ctrlCandidate.getIamge(lblImageCand), cbxAgeCand, txtIPoliticParty);
+            this.ctrlCandidate.loadDataCandidates(tblCandidation);
+            this.ctrlCandidate.cleanTexField(txtName, txtLastName, txtAdrresPhoto, lblImageCand, txtIPoliticParty, txtIdentification);
+        } catch (IOException ex) {
+            Logger.getLogger(Administrator.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnAddVotanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddVotanteActionPerformed
@@ -772,6 +840,35 @@ public class Administrator extends javax.swing.JFrame {
         this.CU.selectedRow(tblVotantes, txtNameVot, txtLastNameVot, txtSecundNameVot, txtIdentificationVot, cbxAgeVot, txtAddressVot, txtPasswordVot,cbxRolVot);
     }//GEN-LAST:event_tblVotantesMouseClicked
 
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5MouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        this.ctrlCandidate.DeleCandidates();
+        this.ctrlCandidate.loadDataCandidates(tblCandidation);
+        this.ctrlCandidate.cleanTexField(txtName, txtLastName, txtSecondName,  lblAge, txtIdentification, txtIPoliticParty);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void btnAddPeriodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPeriodActionPerformed
+        // TODO add your handling code here:
+        JButton btn = InterFaceU.btnVote();
+        this.CP.mostrarDiferenciaDeFechas(txtStartDate.getText(), txtFinalDate.getText(), txtIdentification,btn);
+    }//GEN-LAST:event_btnAddPeriodActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -782,7 +879,6 @@ public class Administrator extends javax.swing.JFrame {
     private javax.swing.JButton btnAddVotante;
     private javax.swing.JButton btnAddressPhoto;
     private javax.swing.JButton btnDeletePeriod;
-    private javax.swing.JButton btnEditPeriod;
     private javax.swing.JComboBox<String> cbxAgeCand;
     private javax.swing.JComboBox<String> cbxAgeVot;
     private javax.swing.JComboBox<String> cbxRolVot;
@@ -799,6 +895,9 @@ public class Administrator extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -820,6 +919,7 @@ public class Administrator extends javax.swing.JFrame {
     private javax.swing.JLabel lblAge;
     private javax.swing.JPanel lblImage;
     private javax.swing.JLabel lblImageCand;
+    private javax.swing.JLabel lblInformation;
     private javax.swing.JLabel lblLastName1;
     private javax.swing.JLabel lblNameCan;
     private javax.swing.JLabel lblNameCan1;
