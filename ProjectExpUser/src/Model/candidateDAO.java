@@ -164,4 +164,32 @@ public class candidateDAO {
         return candidatesList;
     }
     
+    public void reorganizarIDsCan() {
+        DBConnection db = new DBConnection();
+
+        // Consulta SQL para obtener todos los IDs de los estudiantes ordenados
+        String consultaSQL = "SELECT id FROM candidates ORDER BY id";
+        try (PreparedStatement preparedStatement = db.getConnection().prepareStatement(consultaSQL); ResultSet resultSet = preparedStatement.executeQuery())  {
+
+            int nuevoID = 1;
+            while (resultSet.next()) {
+                int antiguoID = resultSet.getInt("id");
+                if (nuevoID != antiguoID) {
+                    try (PreparedStatement updateStatement = db.getConnection().prepareStatement("UPDATE candidates SET id = ? WHERE id = ?")) {
+                        updateStatement.setInt(1, nuevoID);
+                        updateStatement.setInt(2, antiguoID);
+                        updateStatement.executeUpdate();
+                    } catch (SQLException e) {
+                        JOptionPane.showMessageDialog(null, "Error al actualizar el ID: " + e.toString());
+                    }
+                }
+                nuevoID++;
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al obtener los IDs: " + e.toString());
+        } finally {
+            db.disconnect();
+        }
+    }
 }

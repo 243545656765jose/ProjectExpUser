@@ -23,13 +23,28 @@ public class CTRLcandidate {
    //delete Candidation
     public void DeleCandidates() {
         this.dao.delete(this.id);
+        this.dao.reorganizarIDsCan();
     }
 
     //add the created candidate
     public void SaveCandidate(JTextField txtName, JTextField txtLastName, JTextField txtSecondName, JTextField txtIdentification, JTextField txtAdrresPhoto, JComboBox cbxAgeCand, JTextField txtIPoliticParty) {
+        if (txtName.getText().isEmpty() || txtLastName.getText().isEmpty() || txtIdentification.getText().isEmpty() || cbxAgeCand.getSelectedItem() == null || txtAdrresPhoto.getText().isEmpty() || txtIPoliticParty.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try {
+            // Validar la identificación como números enteros
+            Integer.parseInt(txtIdentification.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "La identificación debe ser números enteros", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         String base64String = txtAdrresPhoto.getText();
         byte[] imageData = Base64.getDecoder().decode(base64String);
         this.dao.createCandidate(new candidates(txtName.getText(), txtLastName.getText(), txtSecondName.getText(), Integer.parseInt(txtIdentification.getText()), Integer.parseInt(cbxAgeCand.getSelectedItem().toString()), imageData, txtIPoliticParty.getText()));
+        this.dao.reorganizarIDsCan();
     }
 
     //Busca la imagen  en archivos de la pc y la agrega  a un array de byte
@@ -154,7 +169,21 @@ public class CTRLcandidate {
 
     //Modify a candidate
     public void upDataCandidate(JTextField txtName, JTextField txtLastName, JTextField txtSecondName, JTextField txtIdentification, byte[] photo, JComboBox cbxAgeCand, JTextField txtIPoliticParty) {
+        if (txtName.getText().isEmpty() || txtLastName.getText().isEmpty() || txtIdentification.getText().isEmpty() || cbxAgeCand.getSelectedItem() == null || txtIPoliticParty.getText().isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    try {
+        // Validar la identificación y la edad como números enteros
+        Integer.parseInt(txtIdentification.getText());
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "La identificación debe ser números enteros", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+        
         this.dao.upCandidates(new candidates(this.id, txtName.getText(), txtLastName.getText(), txtSecondName.getText(), Integer.parseInt(txtIdentification.getText()), Integer.parseInt(cbxAgeCand.getSelectedItem().toString()), photo, txtIPoliticParty.getText()));
+        this.dao.reorganizarIDsCan();
     }
 
     //Devuelve una lista de los nombre de los candidTOS
@@ -190,4 +219,5 @@ public class CTRLcandidate {
         lblPhoto.setIcon(null);
     }
 
+    
 }
