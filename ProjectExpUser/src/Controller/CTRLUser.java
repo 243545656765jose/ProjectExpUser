@@ -53,13 +53,50 @@ public class CTRLUser {
     //Adds a new user to the database based on the input from text fields.
     public void addUser(JTextField name, JTextField last_name, JTextField secund_name, JTextField id_number, JComboBox age, JTextField address, JTextField password, JComboBox rol_id) {
         //Validaciones aqui              
-         
+        if (name.getText().isEmpty() || last_name.getText().isEmpty() || id_number.getText().isEmpty() || age.getSelectedItem() == null || address.getText().isEmpty() || password.getText().isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+        return; // Detener la operación si hay campos vacíos
+    }
+
+    try {
+        // Validar la edad como un número entero
+        Integer.parseInt(id_number.getText());
+        Integer.parseInt(age.getSelectedItem().toString());
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "La edad y la identificación deben ser números enteros", "Error", JOptionPane.ERROR_MESSAGE);
+        return; // Detener la operación si hay un error al convertir a entero
+    }
+
+    // Validar que el nombre y apellidos solo contengan letras
+    if (!name.getText().matches("^[a-zA-Z]+$") || !last_name.getText().matches("^[a-zA-Z]+$") || !secund_name.getText().matches("^[a-zA-Z]+$")) {
+        JOptionPane.showMessageDialog(null, "El nombre y apellidos deben contener solo letras", "Error", JOptionPane.ERROR_MESSAGE);
+        return; // Detener la operación si hay caracteres no permitidos
+    } 
+        
         this.ud.create(new User(name.getText(), last_name.getText(), secund_name.getText(), Integer.parseInt(id_number.getText()), Integer.parseInt(age.getSelectedItem().toString()), address.getText(), password.getText(), rol_id.getSelectedItem().toString()));
         this.ud.reorganizarIDs();  
         
     }
 
     public void upDatauSERS(JTextField txtNameVot, JTextField txtLastNameVot, JTextField txtSecundNameVot, JTextField txtIdentificationVot, JComboBox cbxAgeVot, JTextField txtAddressVot, JTextField txtPasswordVot, JComboBox rol_id) {
+        if (txtNameVot.getText().isEmpty() || txtLastNameVot.getText().isEmpty() || txtIdentificationVot.getText().isEmpty() || cbxAgeVot.getSelectedItem() == null || txtAddressVot.getText().isEmpty() || txtPasswordVot.getText().isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+        return; // Detener la operación si hay campos vacíos
+    }
+
+    try {
+        // Validar la edad como un número entero
+        Integer.parseInt(txtIdentificationVot.getText());
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "La identificación debe ser un número entero", "Error", JOptionPane.ERROR_MESSAGE);
+        return; // Detener la operación si hay un error al convertir a entero
+    }
+
+    // Validar que el nombre y apellidos solo contengan letras
+    if (!txtNameVot.getText().matches("^[a-zA-Z]+$") || !txtLastNameVot.getText().matches("^[a-zA-Z]+$") || !txtSecundNameVot.getText().matches("^[a-zA-Z]+$"))  {
+        JOptionPane.showMessageDialog(null, "El nombre y apellidos deben contener solo letras", "Error", JOptionPane.ERROR_MESSAGE);
+        return; // Detener la operación si hay caracteres no permitidos
+    }
         
         this.ud.update(new User(id,txtNameVot.getText(), txtLastNameVot.getText(), txtSecundNameVot.getText(),  Integer.parseInt(txtIdentificationVot.getText()), Integer.parseInt(cbxAgeVot.getSelectedItem().toString()), txtAddressVot.getText(), txtPasswordVot.getText(), rol_id.getSelectedItem().toString()));
         this.ud.reorganizarIDs();  
