@@ -14,33 +14,8 @@ import javax.swing.JTextField;
 public class UserDAO {
    
     public UserDAO() {
-    }
-    
-    // Agrega un nuevo usuario con un rol de votante a la base de datos.
-public void createVoter(User user) {
-    DBConnection db = new DBConnection();
-    String consultaSQL = "INSERT INTO users (name, last_name, secund_name, id_number, age, address, password, rol_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-    
-    try {
-        PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
-        ps.setString(1, user.getName());
-        ps.setString(2, user.getLast_name());
-        ps.setString(3, user.getSecund_name());
-        ps.setInt(4, user.getId_number());
-        ps.setInt(5, user.getAge());
-        ps.setString(6, user.getAddress());
-        ps.setString(7, user.getPassword());
-        // Asigna el rol de votante (puedes ajustar el ID según la estructura de tu base de datos).
-        ps.setInt(8, 2); // Supongamos que el ID del rol de votante es 2.
-        
-        ps.execute();
-        JOptionPane.showMessageDialog(null, "Se insertó correctamente el usuario como votante");
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(null, "No se insertó correctamente el usuario, error: " + e.toString());
-    } finally {
-        db.disconnect();
-    }
-}
+    }   
+   
     /*Creates a new user record in the database.
      The User object containing user information to be inserted.*/
     public void create(User User) {
@@ -66,25 +41,27 @@ public void createVoter(User user) {
         }
     }
 
-    
-    public List<User> addEstado(String name){
-        DBConnection db = new DBConnection();
-        List<User> Users = new ArrayList<>();
-        String selectSql = "SELECT Estado  FROM users WHERE name =?";
-        try {
-            PreparedStatement selectStatement = db.getConnection().prepareStatement(selectSql);
-            selectStatement.setString(1, name);
-            ResultSet resultSet = selectStatement.executeQuery();
-            while (resultSet.next()) {
-                int id = resultSet.getInt("Estado");
-                            }
-        } catch (SQLException e) {
-            System.err.println("Error: " + e.getMessage());
-        } finally {
-            db.disconnect();
+    public int addEstado(String id_number) {
+    DBConnection db = new DBConnection();
+    int estado = 0;
+    String selectSql = "SELECT Estado FROM users WHERE id_number =?";
+
+    try {
+        PreparedStatement selectStatement = db.getConnection().prepareStatement(selectSql);
+        selectStatement.setString(1, id_number);
+        ResultSet resultSet = selectStatement.executeQuery();
+
+        if (resultSet.next()) {
+            estado = resultSet.getInt("Estado");
         }
-        return Users;
+    } catch (SQLException e) {
+        System.err.println("Error: " + e.getMessage());
+    } finally {
+        db.disconnect();
     }
+
+    return estado;
+}
     
     /*Retrieves a list of User objects from the database based on specified criteria.
      The entity ID to filter users by (0 if not used for filtering).  
@@ -110,8 +87,8 @@ public void createVoter(User user) {
                 String address = resultSet.getString("address");
                 String password = resultSet.getString("password");
                 String rol_id = resultSet.getString("rol_id");
-                String Estado = resultSet.getString("Estado");
-                Users.add(new User(id, name, last_name,secund_name, id, id_number,address,password,rol_id, Estado));
+                int Estado = resultSet.getInt("Estado");
+                Users.add(new User(id, name, last_name, secund_name, id_number,age , address, password, rol_id ,Estado));
             }
         } catch (SQLException e) {
             System.err.println("Error: " + e.getMessage());
@@ -200,14 +177,14 @@ public void createVoter(User user) {
         }
     }   
      
-     public void updateUserState(int Id, int newState) {
+     public void updateUserState(int id_number, int newState) {
         DBConnection db = new DBConnection();
-        String updateSql = "UPDATE users SET Estado = ? WHERE id = ?";
+        String updateSql = "UPDATE users SET Estado = ? WHERE id_number = ?";
 
         try {
             PreparedStatement updateStatement = db.getConnection().prepareStatement(updateSql);
             updateStatement.setInt(1, newState);
-            updateStatement.setInt(2, Id);
+            updateStatement.setInt(2, id_number);
             updateStatement.executeUpdate();
 
             JOptionPane.showMessageDialog(null, "Se actualizó correctamente el estado del usuario");
@@ -239,7 +216,8 @@ public void createVoter(User user) {
             String address = resultSet.getString("address");
             String password = resultSet.getString("password");
             String rol_id = resultSet.getString("rol_id");
-            user = new User(name, last_name, secund_name, id,  id_number, address, password,rol_id);
+            int Estado = resultSet.getInt("Estado");
+            user = new User(id,name, last_name, secund_name, id_number,age , address, password,rol_id,Estado);
         }
     } catch (SQLException e) {
         System.err.println("Error: " + e.getMessage());
@@ -249,49 +227,4 @@ public void createVoter(User user) {
     
     return user;
 }
-    
-    
-    public boolean validar(String name, String last_name, String secund_name, String id_number, String address, String password) {
-    Validations validacion = new Validations();
-
-    if (!validacion.validarLetras(name)) {
-        JOptionPane.showMessageDialog(null, "Error: El nombre debe contener solo letras.");
-        return false;
-    }
-    if (!validacion.validarLetras(last_name)) {
-        JOptionPane.showMessageDialog(null, "Error: El primer apellido debe contener solo letras.");
-        return false;
-    }
-    
-    if (!validacion.validarLetras(secund_name)) {
-        JOptionPane.showMessageDialog(null, "Error: El segundo apellido debe contener solo letras.");
-        return false;
-    }
-        if (!validacion.validarCedula(id_number)) {
-        JOptionPane.showMessageDialog(null, "Error: El formato del correo electrónico es incorrecto.");
-        return false;
-    }
-       
-        
-    if (!validacion.validarLetras(address)) {
-        JOptionPane.showMessageDialog(null, "Error: El nombre debe contener solo letras.");
-        return false;
-
-    }
-    
-    if (!validacion.validarLetras(password)) {
-        JOptionPane.showMessageDialog(null, "Error: El nombre debe contener solo letras.");
-        return false;
-    }
-        return false;
-    }
-    
-    public boolean ValidateEmptyFields(JTextField[] textFields) {
-        for (JTextField textField : textFields) {
-            if (textField.getText().trim().isEmpty()) {
-                return true; 
-            }
-        }
-        return false;
-    }
 }

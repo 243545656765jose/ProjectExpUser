@@ -1,6 +1,7 @@
 package Controller;
  import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.JTextField;
 
 public class Validations {
 
@@ -8,10 +9,10 @@ public class Validations {
 
     }
 
-    public boolean validarLetras(String valor) {
+    public boolean validarLetras(JTextField valor) {
         // Valida letras, "ñ", tildes y espacios
         Pattern pat = Pattern.compile("[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ ]*");
-        Matcher mat = pat.matcher(valor);
+        Matcher mat = pat.matcher((CharSequence) valor);
         return mat.matches();
     }
 
@@ -56,7 +57,7 @@ public class Validations {
 
     public boolean validarCedula(String valor) {
         //Validates id numbers legally used in Costa Rica
-        Pattern pat = Pattern.compile("^[0-9]{1}-[0-9]{4}-[0-9]{4}$");
+        Pattern pat = Pattern.compile("^[0-9]{1}[0-9]{4}[0-9]{4}$");
         Matcher mat = pat.matcher(valor);
         return mat.matches();
    }

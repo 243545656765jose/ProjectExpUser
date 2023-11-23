@@ -758,7 +758,7 @@ public class Administrator extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        this.CU.upDatauSERS(txtNameVot, txtLastNameVot, txtSecundNameVot, txtIdentificationVot, cbxAgeVot, txtAddressVot, txtPasswordVot,cbxRolVot);
+        this.CU.upDatauSERS(txtNameVot, txtLastNameVot, txtSecundNameVot, txtIdentificationVot, cbxAgeVot, txtAddressVot, txtPasswordVot, cbxRolVot);
         this.clear();
         this.CU.loadDataUser(tblVotantes);
     }//GEN-LAST:event_jButton5ActionPerformed

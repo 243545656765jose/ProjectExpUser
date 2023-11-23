@@ -12,12 +12,22 @@ public class User {
     private String address;
     private String password;
     private String rol_id;
-    private String Estado;
+    private int Estado;
     
     
-    public User(){}
+    public User(int id, String name, String last_name, String secund_name, int id_number, int age, String address, String password, String rol_id){
+    this.id = id;
+        this.name = name;
+        this.last_name = last_name;
+        this.secund_name = secund_name;
+        this.id_number = id_number;
+        this.age = age;
+        this.address = address;
+        this.password = password;
+        this.rol_id = rol_id;
+    }
 
-    public User(int id, String name, String last_name, String secund_name, int id_number, int age, String address, String password, String rol_id, String Estado) {
+    public User(int id, String name, String last_name, String secund_name, int id_number, int age, String address, String password, String rol_id,int Estado) {
         this.id = id;
         this.name = name;
         this.last_name = last_name;
@@ -176,14 +186,14 @@ public class User {
     /**
      * @return the Estado
      */
-    public String getEstado() {
+    public int getEstado() {
         return Estado;
     }
 
     /**
      * @param Estado the Estado to set
      */
-    public void setEstado(String Estado) {
+    public void setEstado(int Estado) {
         this.Estado = Estado;
     }
     

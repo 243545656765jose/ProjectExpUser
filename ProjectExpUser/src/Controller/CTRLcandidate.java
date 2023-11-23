@@ -25,21 +25,6 @@ public class CTRLcandidate {
         String base64String = txtAdrresPhoto.getText();
         byte[] imageData = Base64.getDecoder().decode(base64String);
         
-        JTextField[] campos = {txtName,txtLastName,txtSecondName,txtIdentification,txtIPoliticParty};
-        String name = txtName.getText();
-        String last_name = txtLastName.getText();
-        String second_name = txtSecondName.getText();
-        String id_number = txtIdentification.getText();
-        String party = txtIPoliticParty.getText();
-        
-        if (dao.ValidateEmptyFields(campos)) {
-            JOptionPane.showMessageDialog(null, "Complete todos los campos.");
-            return;
-        }
-        if (!dao.validar(name ,last_name ,second_name ,id_number , party)) {
-            return;
-        }
-        
         this.dao.createCandidate(new candidates(txtName.getText(), txtLastName.getText(), txtSecondName.getText(), Integer.parseInt(txtIdentification.getText()), Integer.parseInt(cbxAgeCand.getSelectedItem().toString()), imageData, txtIPoliticParty.getText()));
  
     }
@@ -146,7 +131,7 @@ public class CTRLcandidate {
                 this.displayImageFromBytes(lblPhoto, dao.bitesPhoto(Integer.parseInt(table.getValueAt(row, 0).toString())));
                 party.setText(table.getValueAt(row, 6).toString());
                 age.setSelectedItem(table.getValueAt(row, 5).toString());
-                id_number.setText(table.getValueAt(row, 1).toString());
+                id_number.setText(table.getValueAt(row, 4).toString());
             } else {
                 JOptionPane.showMessageDialog(null, "Fila no seleccionada");
             }
@@ -158,24 +143,10 @@ public class CTRLcandidate {
 
    //Modify a candidate
     public void upDataCandidate(JTextField txtName, JTextField txtLastName, JTextField txtSecondName, JTextField txtIdentification, JTextField txtAdrresPhoto, JComboBox cbxAgeCand, JTextField txtIPoliticParty) {
+               
         String base64String = txtAdrresPhoto.getText();
         byte[] imageData = Base64.getDecoder().decode(base64String);
         this.dao.upCandidates(new candidates(this.id, txtName.getText(), txtLastName.getText(), txtSecondName.getText(), Integer.parseInt(txtIdentification.getText()), Integer.parseInt(cbxAgeCand.getSelectedItem().toString()), imageData, txtIPoliticParty.getText()));
-        
-        JTextField[] campos = {txtName,txtLastName,txtSecondName,txtIdentification,txtIPoliticParty};
-        String name = txtName.getText();
-        String last_name = txtLastName.getText();
-        String second_name = txtSecondName.getText();
-        String id_number = txtIdentification.getText();
-        String party = txtIPoliticParty.getText();
-        
-        if (dao.ValidateEmptyFields(campos)) {
-            JOptionPane.showMessageDialog(null, "Complete todos los campos.");
-            return;
-        }
-        if (!dao.validar(name ,last_name ,second_name ,id_number , party)) {
-            return;
-        }
         
     }
     //Devuelve una lista de los nombre de los candidTOS
