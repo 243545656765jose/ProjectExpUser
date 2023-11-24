@@ -213,12 +213,6 @@ public class InterfaceUser extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.ctrlCandidates.addVote(cbxCandidates.getSelectedItem().toString());
         
-    /* Obtén el ID del usuario (puedes obtenerlo de alguna manera, dependiendo de tu aplicación)
-    int userId = obtenerIdUsuario();
-
-    // Actualiza el estado del usuario (cambia 1 por el nuevo estado que desees asignar)
-    UD.updateUserState(userId, 1);*/
-        
     }//GEN-LAST:event_btnVotoActionPerformed
 
     private void cbxCandidatesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbxCandidatesMouseClicked

@@ -67,10 +67,10 @@ public class CTRLUser {
     }
 
     // Validar que el nombre y apellidos solo contengan letras
-    if (!name.getText().matches("^[a-zA-Z]+$") || !last_name.getText().matches("^[a-zA-Z]+$") || !secund_name.getText().matches("^[a-zA-Z]+$")) {
-        JOptionPane.showMessageDialog(null, "El nombre y apellidos deben contener solo letras", "Error", JOptionPane.ERROR_MESSAGE);
-        return; // Detener la operación si hay caracteres no permitidos
-    } 
+    if (!name.getText().matches("^[a-z A-ZáéíóúÁÉÍÓÚñÑ]+$") || !last_name.getText().matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$") || !secund_name.getText().matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$") ) {
+    JOptionPane.showMessageDialog(null, "El nombre y apellidos deben contener solo letras", "Error", JOptionPane.ERROR_MESSAGE);
+    return; // Detener la operación si hay caracteres no permitidos
+} 
         
         this.ud.create(new User(name.getText(), last_name.getText(), secund_name.getText(), Integer.parseInt(id_number.getText()), Integer.parseInt(age.getSelectedItem().toString()), address.getText(), password.getText(), rol_id.getSelectedItem().toString()));
         this.ud.reorganizarIDs();  
@@ -92,10 +92,10 @@ public class CTRLUser {
     }
 
     // Validar que el nombre y apellidos solo contengan letras
-    if (!txtNameVot.getText().matches("^[a-zA-Z]+$") || !txtLastNameVot.getText().matches("^[a-zA-Z]+$") || !txtSecundNameVot.getText().matches("^[a-zA-Z]+$"))  {
-        JOptionPane.showMessageDialog(null, "El nombre y apellidos deben contener solo letras", "Error", JOptionPane.ERROR_MESSAGE);
-        return; // Detener la operación si hay caracteres no permitidos
-    }
+    if (!txtNameVot.getText().matches("^[a-z A-ZáéíóúÁÉÍÓÚñÑ]+$") || !txtLastNameVot.getText().matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$") || !txtSecundNameVot.getText().matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$") ) {
+    JOptionPane.showMessageDialog(null, "El nombre y apellidos deben contener solo letras", "Error", JOptionPane.ERROR_MESSAGE);
+    return; // Detener la operación si hay caracteres no permitidos
+} 
         
         this.ud.update(new User(id,txtNameVot.getText(), txtLastNameVot.getText(), txtSecundNameVot.getText(),  Integer.parseInt(txtIdentificationVot.getText()), Integer.parseInt(cbxAgeVot.getSelectedItem().toString()), txtAddressVot.getText(), txtPasswordVot.getText(), rol_id.getSelectedItem().toString()));
         this.ud.reorganizarIDs();  

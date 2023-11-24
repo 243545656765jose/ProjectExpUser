@@ -41,28 +41,7 @@ public class UserDAO {
         }
     }
 
-    public int addEstado(String id_number) {
-    DBConnection db = new DBConnection();
-    int estado = 0;
-    String selectSql = "SELECT Estado FROM users WHERE id_number =?";
-
-    try {
-        PreparedStatement selectStatement = db.getConnection().prepareStatement(selectSql);
-        selectStatement.setString(1, id_number);
-        ResultSet resultSet = selectStatement.executeQuery();
-
-        if (resultSet.next()) {
-            estado = resultSet.getInt("Estado");
-        }
-    } catch (SQLException e) {
-        System.err.println("Error: " + e.getMessage());
-    } finally {
-        db.disconnect();
-    }
-
-    return estado;
-}
-    
+        
     /*Retrieves a list of User objects from the database based on specified criteria.
      The entity ID to filter users by (0 if not used for filtering).  
      The user ID to filter users by (0 if not used for filtering).
@@ -176,34 +155,16 @@ public class UserDAO {
             db.disconnect();
         }
     }   
-     
-     public void updateUserState(int id_number, int newState) {
-        DBConnection db = new DBConnection();
-        String updateSql = "UPDATE users SET Estado = ? WHERE id_number = ?";
-
-        try {
-            PreparedStatement updateStatement = db.getConnection().prepareStatement(updateSql);
-            updateStatement.setInt(1, newState);
-            updateStatement.setInt(2, id_number);
-            updateStatement.executeUpdate();
-
-            JOptionPane.showMessageDialog(null, "Se actualizó correctamente el estado del usuario");
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No se pudo actualizar el estado del usuario, error: " + e.toString());
-        } finally {
-            db.disconnect();
-        }
-    }
-    
+         
     //Retrieves a User object from the database based on the provided username.
-    public User getUserByUsername(String username) {
+    public User getUserByUsername(String id_NUmber) {
     DBConnection db = new DBConnection();
     User user = null;
-    String sql = "SELECT * FROM users WHERE name = ?";
+    String sql = "SELECT * FROM users WHERE id_number = ?";
     
     try {
         PreparedStatement ps = db.getConnection().prepareStatement(sql);
-        ps.setString(1, username);
+        ps.setString(1, id_NUmber);
         ResultSet resultSet = ps.executeQuery();
         
         if (resultSet.next()) {

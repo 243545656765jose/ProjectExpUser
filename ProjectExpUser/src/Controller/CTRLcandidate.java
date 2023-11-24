@@ -40,10 +40,10 @@ public class CTRLcandidate {
             JOptionPane.showMessageDialog(null, "La identificación debe ser números enteros", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if (!txtName.getText().matches("^[a-zA-Z]+$") || !txtLastName.getText().matches("^[a-zA-Z]+$") || !txtSecondName.getText().matches("^[a-zA-Z]+$") || !txtIPoliticParty.getText().matches("^[a-zA-Z]+$")) {
-        JOptionPane.showMessageDialog(null, "El nombre y apellidos deben contener solo letras", "Error", JOptionPane.ERROR_MESSAGE);
-        return; // Detener la operación si hay caracteres no permitidos
-    }
+        if (!txtName.getText().matches("^[a-z A-ZáéíóúÁÉÍÓÚñÑ]+$") || !txtLastName.getText().matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$") || !txtSecondName.getText().matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$") || !txtIPoliticParty.getText().matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$")) {
+    JOptionPane.showMessageDialog(null, "El nombre,apellidos y partido deben contener solo letras", "Error", JOptionPane.ERROR_MESSAGE);
+    return; // Detener la operación si hay caracteres no permitidos
+}
         
         
         String base64String = txtAdrresPhoto.getText();
@@ -187,10 +187,10 @@ public class CTRLcandidate {
         return;
     }
     
-   if (!txtName.getText().matches("^[a-zA-Z]+$") || !txtLastName.getText().matches("^[a-zA-Z]+$") || !txtSecondName.getText().matches("^[a-zA-Z]+$") || !txtIPoliticParty.getText().matches("^[a-zA-Z]+$")) {
-        JOptionPane.showMessageDialog(null, "El nombre y apellidos deben contener solo letras", "Error", JOptionPane.ERROR_MESSAGE);
-        return; // Detener la operación si hay caracteres no permitidos
-    } 
+   if (!txtName.getText().matches("^[a-z A-ZáéíóúÁÉÍÓÚñÑ]+$") || !txtLastName.getText().matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$") || !txtSecondName.getText().matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$") || !txtIPoliticParty.getText().matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$")) {
+    JOptionPane.showMessageDialog(null, "El nombre,apellidos y partido deben contener solo letras", "Error", JOptionPane.ERROR_MESSAGE);
+    return; // Detener la operación si hay caracteres no permitidos
+}
         
         this.dao.upCandidates(new candidates(this.id, txtName.getText(), txtLastName.getText(), txtSecondName.getText(), Integer.parseInt(txtIdentification.getText()), Integer.parseInt(cbxAgeCand.getSelectedItem().toString()), photo, txtIPoliticParty.getText()));
         this.dao.reorganizarIDsCan();
