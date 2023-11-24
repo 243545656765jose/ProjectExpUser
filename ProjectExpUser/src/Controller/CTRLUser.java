@@ -61,9 +61,8 @@ public class CTRLUser {
     try {
         // Validar la edad como un número entero
         Integer.parseInt(id_number.getText());
-        Integer.parseInt(age.getSelectedItem().toString());
     } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(null, "La edad y la identificación deben ser números enteros", "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, "La identificación debe ser números enteros", "Error", JOptionPane.ERROR_MESSAGE);
         return; // Detener la operación si hay un error al convertir a entero
     }
 
