@@ -1,19 +1,18 @@
 package View;
 
-import Controller.CTRLUser;
+
 import Controller.CTRLcandidate;
 import Controller.CTRLgraphic;
-import Model.UserDAO;
+import Controller.CTRLinterfaceMethods;
 import javax.swing.JButton;
-import javax.swing.JTable;
+
 
 
 public class InterfaceUser extends javax.swing.JFrame {
-
-    UserDAO UD =new UserDAO();
-    CTRLUser CU =new CTRLUser();
     CTRLcandidate ctrlCandidates = new CTRLcandidate();
     CTRLgraphic CTRLgraphic = new CTRLgraphic();
+    CTRLinterfaceMethods ctrInterface= new CTRLinterfaceMethods();
+    
 
     public InterfaceUser() {
         this.setUndecorated(true);
@@ -35,7 +34,17 @@ public class InterfaceUser extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         tbOrigin = new javax.swing.JTabbedPane();
         lblImageVote = new javax.swing.JPanel();
@@ -48,6 +57,9 @@ public class InterfaceUser extends javax.swing.JFrame {
         plResult = new javax.swing.JPanel();
         plFinalResult = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         jLabel2.setText("jLabel2");
 
@@ -68,32 +80,76 @@ public class InterfaceUser extends javax.swing.JFrame {
                 jLabel3MouseClicked(evt);
             }
         });
-        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 700, 40, 40));
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 660, 40, 40));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Image/icons8-resultado-25.png"))); // NOI18N
         jLabel7.setText("Resultados");
         jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel7MouseClicked(evt);
             }
-        });
-        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 130, -1));
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel8.setText("Votar");
-        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel8MouseClicked(evt);
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel7MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel7MouseExited(evt);
             }
         });
-        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 80, -1));
+        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 190, -1));
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Image/icons8-urna-con-boleta-25.png"))); // NOI18N
+        jLabel9.setText("Votar");
+        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel9MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel9MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel9MouseExited(evt);
+            }
+        });
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 190, -1));
+
+        jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Image/icons8-costa-rica-emoji-25.png"))); // NOI18N
+        jPanel3.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 30, 20));
+
+        jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Image/icons8-costa-rica-emoji-25.png"))); // NOI18N
+        jPanel3.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 40, 20));
+
+        jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Image/icons8-costa-rica-emoji-25.png"))); // NOI18N
+        jPanel3.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 30, 20));
+
+        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Image/icons8-costa-rica-emoji-25.png"))); // NOI18N
+        jPanel3.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 30, 20));
+
+        jLabel30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Image/icons8-costa-rica-emoji-25.png"))); // NOI18N
+        jPanel3.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, -1, 20));
+
+        jLabel31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Image/icons8-costa-rica-emoji-25.png"))); // NOI18N
+        jPanel3.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, 30, 20));
+
+        jLabel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Image/icons8-costa-rica-emoji-25.png"))); // NOI18N
+        jPanel3.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 20, 20));
+
+        jLabel33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Image/icons8-costa-rica-emoji-25.png"))); // NOI18N
+        jPanel3.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 30, 20));
+
+        jLabel34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Image/icons8-costa-rica-emoji-25.png"))); // NOI18N
+        jPanel3.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 30, 20));
+
+        jLabel35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Image/icons8-costa-rica-emoji-25.png"))); // NOI18N
+        jPanel3.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 30, 20));
 
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Image/papers.co-vm29-poly-art-abstract-blue-green-pattern-41-iphone-wallpaper.jpg"))); // NOI18N
-        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(-9, 1, 200, 740));
+        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 700));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 0, 190, 740));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-8, 40, 200, 700));
 
         tbOrigin.setTabPlacement(javax.swing.JTabbedPane.LEFT);
 
@@ -114,6 +170,7 @@ public class InterfaceUser extends javax.swing.JFrame {
         });
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Candidatos");
 
         btnVoto.setBackground(new java.awt.Color(0, 204, 0));
@@ -137,39 +194,36 @@ public class InterfaceUser extends javax.swing.JFrame {
         lblImageVoteLayout.setHorizontalGroup(
             lblImageVoteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lblImageVoteLayout.createSequentialGroup()
-                .addContainerGap(64, Short.MAX_VALUE)
-                .addComponent(srpCandidates, javax.swing.GroupLayout.PREFERRED_SIZE, 757, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(lblImageVoteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(lblImageVoteLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                        .addGroup(lblImageVoteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnVoto)
-                            .addComponent(cbxCandidates, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(40, Short.MAX_VALUE))
+                        .addGap(187, 187, 187)
+                        .addComponent(srpCandidates, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(141, 141, 141)
+                        .addGroup(lblImageVoteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(lblImageVoteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(btnVoto)
+                                .addComponent(cbxCandidates, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(lblImageVoteLayout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(lblImageVoteLayout.createSequentialGroup()
-                .addGap(340, 340, 340)
-                .addComponent(lblNameCandidateView, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(330, 330, 330)
+                        .addComponent(lblNameCandidateView, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         lblImageVoteLayout.setVerticalGroup(
             lblImageVoteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lblImageVoteLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addGroup(lblImageVoteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(srpCandidates, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(lblImageVoteLayout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cbxCandidates, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnVoto, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnVoto, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(srpCandidates, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(lblNameCandidateView, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap(239, Short.MAX_VALUE))
         );
 
         tbOrigin.addTab("0", lblImageVote);
@@ -204,7 +258,24 @@ public class InterfaceUser extends javax.swing.JFrame {
 
         tbOrigin.addTab("1", plResult);
 
-        getContentPane().add(tbOrigin, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 0, 1220, 740));
+        getContentPane().add(tbOrigin, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 40, 1220, 700));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Image/icons8-menú-27.png"))); // NOI18N
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 20));
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel8.setText("X");
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel8MouseClicked(evt);
+            }
+        });
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1340, 10, 20, -1));
+
+        jLabel4.setBackground(new java.awt.Color(0, 0, 102));
+        jLabel4.setOpaque(true);
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1380, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -242,17 +313,42 @@ public class InterfaceUser extends javax.swing.JFrame {
         tbOrigin.setSelectedIndex(1);
     }//GEN-LAST:event_jLabel7MouseClicked
 
-    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
-        // TODO add your handling code here:
-        tbOrigin.setSelectedIndex(0);
-    }//GEN-LAST:event_jLabel8MouseClicked
-
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         // TODO add your handling code here:
            dispose();
         Login lg  = new Login();
         lg.setVisible(true);
     }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
+        // TODO add your handling code here:
+        tbOrigin.setSelectedIndex(0);
+    }//GEN-LAST:event_jLabel9MouseClicked
+
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jLabel8MouseClicked
+
+    private void jLabel9MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseEntered
+        // TODO add your handling code here:
+        this.ctrInterface.AddBorder( jLabel9);
+    }//GEN-LAST:event_jLabel9MouseEntered
+
+    private void jLabel9MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseExited
+        // TODO add your handling code here:
+        this.ctrInterface.NullBorder(jLabel9);
+    }//GEN-LAST:event_jLabel9MouseExited
+
+    private void jLabel7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseEntered
+        // TODO add your handling code here:
+        this.ctrInterface.AddBorder( jLabel7);
+    }//GEN-LAST:event_jLabel7MouseEntered
+
+    private void jLabel7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseExited
+        // TODO add your handling code here:
+         this.ctrInterface.NullBorder(jLabel7);
+    }//GEN-LAST:event_jLabel7MouseExited
 
     /**
      * @param args the command line arguments
@@ -265,10 +361,23 @@ public class InterfaceUser extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel lblImageVote;
     private javax.swing.JLabel lblNameCandidateView;
