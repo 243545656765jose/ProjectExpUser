@@ -1,7 +1,6 @@
 
 package Model;
 
-import Controller.Validations;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -188,4 +187,22 @@ public class UserDAO {
     
     return user;
 }
+    
+    // Method to update the state of a user to 1 based on the user ID
+    public void updateStateTo1(String userId) {
+        DBConnection db = new DBConnection();
+        String updateSQL = "UPDATE users SET Estado = 1 WHERE id_number = ?";
+
+        try {
+            PreparedStatement ps = db.getConnection().prepareStatement(updateSQL);
+            ps.setString(1, userId);
+            ps.executeUpdate();
+
+            JOptionPane.showMessageDialog(null, "Estado actualizado correctamente");
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al actualizar el estado: " + e.toString());
+        } finally {
+            db.disconnect();
+        }
+    }
 }

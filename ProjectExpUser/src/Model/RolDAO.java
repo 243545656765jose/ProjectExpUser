@@ -12,6 +12,7 @@ public class RolDAO {
     public RolDAO() {
     }
 
+    // Retrieve a list of all roles from the database.
     public List<Rol> read() {
 
         DBConnection db = new DBConnection();
@@ -34,6 +35,7 @@ public class RolDAO {
         return Roles;
     }
 
+    //Retrieve the ID of a role based on its name.
     public int getIDRole(String name) {
         int value = 0;
         DBConnection db = new DBConnection();
@@ -53,6 +55,7 @@ public class RolDAO {
         return value;
     }
 
+     // Retrieve the name of a role based on its ID.
     public String getNameRole(int id) {
         String value = "";
         DBConnection db = new DBConnection();
@@ -72,6 +75,8 @@ public class RolDAO {
         return value;
     }
 
+    // Determines the role of a user based on their ID number and password.
+     
     public String determineRole(String user, String pasword) {
         DBConnection db = new DBConnection();
         String rol = "";

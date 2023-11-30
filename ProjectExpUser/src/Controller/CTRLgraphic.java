@@ -12,9 +12,15 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
+//Controller class for managing graphical representation of candidate votes.
+ 
 public class CTRLgraphic {
     candidateDAO dao = new candidateDAO();
     
+    //Creates a dataset with candidate votes for generating a bar chart.
+     
+     //return DefaultCategoryDataset containing candidate votes data.
+     
      public DefaultCategoryDataset addnSources1Reports2() {
          DefaultCategoryDataset data = new DefaultCategoryDataset();
         List<candidates> candidate1 = this.dao.readCandidates();
@@ -27,11 +33,15 @@ public class CTRLgraphic {
         return data;
     }
 
+     //Adds a bar chart to a JPanel using the provided dataset
     public void addGraph(JPanel jPanel5, DefaultCategoryDataset data) {
+        // Create a bar chart with specified labels and data
         JFreeChart graph = ChartFactory.createBarChart("--Grafico Votos-", "Nombres ", "Votos", data, PlotOrientation.VERTICAL, true, true, false);
+        // Create a ChartPanel to display the chart
         ChartPanel panel = new ChartPanel(graph);
         panel.setMouseWheelEnabled(true);
         panel.setPreferredSize(new Dimension(1158, 494));
+        // Set layout and add the chart panel to the specified JPanel
         jPanel5.setLayout(new BorderLayout());
         jPanel5.add(panel, BorderLayout.NORTH);
     }

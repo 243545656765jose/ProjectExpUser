@@ -33,8 +33,13 @@ public class CTRLcandidate {
             return;
         }
 
+        // Validate the length of the identification number
+    if (txtIdentification.getText().length() < 9) {
+        JOptionPane.showMessageDialog(null, "La identificación debe tener al menos 9 dígitos", "Error", JOptionPane.ERROR_MESSAGE);
+        return;  // Stop operation if the length is less than 9
+    }
         try {
-            // Validar la identificación como números enteros
+           // Validate identification as integers
             Integer.parseInt(txtIdentification.getText());
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "La identificación debe ser números enteros", "Error", JOptionPane.ERROR_MESSAGE);
@@ -42,7 +47,7 @@ public class CTRLcandidate {
         }
         if (!txtName.getText().matches("^[a-z A-ZáéíóúÁÉÍÓÚñÑ]+$") || !txtLastName.getText().matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$") || !txtSecondName.getText().matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$") || !txtIPoliticParty.getText().matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$")) {
     JOptionPane.showMessageDialog(null, "El nombre,apellidos y partido deben contener solo letras", "Error", JOptionPane.ERROR_MESSAGE);
-    return; // Detener la operación si hay caracteres no permitidos
+    return; // Stop operation if there are disallowed characters
 }
         
         
@@ -52,7 +57,7 @@ public class CTRLcandidate {
         this.dao.reorganizarIDsCan();
     }
 
-    //Busca la imagen  en archivos de la pc y la agrega  a un array de byte
+    // Search for an image in PC files and add it to a byte array
     public byte[] selectImage(JTextField txtPhoto) {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -61,7 +66,7 @@ public class CTRLcandidate {
             try {
                 File selectedFile = fileChooser.getSelectedFile();
                 BufferedImage image = ImageIO.read(selectedFile);
-                // Convertir la imagen a un arreglo de bytes
+                // Convert to a byte array
                 byte[] imageData = convertImageToByteArray(image);
                 String imageDataString = Base64.getEncoder().encodeToString(imageData);
                 txtPhoto.setText(imageDataString);
@@ -71,20 +76,20 @@ public class CTRLcandidate {
             }
         } return null;
     }
-    //Accede al icono del label
+    // Access the icon of the labelv
     public byte[] getIamge(JLabel photo) throws IOException {
         Icon icon = photo.getIcon();
         Image imagen = ((ImageIcon) icon).getImage();
         return this.convertImageToByteArray(this.toBufferedImage(imagen));
     }
-   //Convierte a un array de byte
+   // Convert the image to a byte array
     public byte[] convertImageToByteArray(BufferedImage image) throws IOException {
-        // Convertir la imagen a un arreglo de bytes (byte array)
+        // Convert the image to a byte array
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(image, "png", baos);
         return baos.toByteArray();
     }
-   //Convierte en un bufferedImage
+    // Convert to a BufferedImage
     public BufferedImage toBufferedImage(Image imagen) {
         BufferedImage bufferedImage = new BufferedImage(imagen.getWidth(null), imagen.getHeight(null),BufferedImage.TYPE_INT_ARGB );
         Graphics2D g2d = bufferedImage.createGraphics();
@@ -92,12 +97,12 @@ public class CTRLcandidate {
         g2d.dispose();
         return bufferedImage;
     }
-    //devuelve la foto de un candidate
+     // Return the photo of a candidate
     public byte[] PhotoVoteCandidate(String name) {
         return this.dao.returnPhoto(name);
     }
 
-    //Agrega la imajen a un label con su tamaño respectivo
+    // Add the image to a label with its respective size
     public void setImageInLabel(byte[] imageData, JLabel label) {
         try {
             if (imageData != null && imageData.length > 0) {
@@ -117,7 +122,7 @@ public class CTRLcandidate {
         }
     }
 
-    //receive a table and load the list of candidates
+    // Receive a table and load the list of candidates
     public void loadDataCandidates(JTable table) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         TableRowSorter<TableModel> order = new TableRowSorter<TableModel>(model);
@@ -152,7 +157,7 @@ public class CTRLcandidate {
             e.printStackTrace();
         }
     }
-    //Le damos formato segun el label
+    // Give it the format according to the label
     public void displayImageFromBytes(JLabel label, byte[] imageData) {
         try {
             if (imageData != null && imageData.length > 0) {
@@ -172,15 +177,21 @@ public class CTRLcandidate {
         }
     }
 
-    //Modify a candidate
+     // Modify a candidate
     public void upDataCandidate(JTextField txtName, JTextField txtLastName, JTextField txtSecondName, JTextField txtIdentification, byte[] photo, JComboBox cbxAgeCand, JTextField txtIPoliticParty) {
         if (txtName.getText().isEmpty() || txtLastName.getText().isEmpty() || txtIdentification.getText().isEmpty() || cbxAgeCand.getSelectedItem() == null || txtIPoliticParty.getText().isEmpty()) {
         JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
         return;
     }
 
+        // Validate the length of the identification number
+    if (txtIdentification.getText().length() < 9) {
+        JOptionPane.showMessageDialog(null, "La identificación debe tener al menos 9 dígitos", "Error", JOptionPane.ERROR_MESSAGE);
+        return;  // Stop operation if the length is less than 9
+    }
+    
     try {
-        // Validar la identificación y la edad como números enteros
+        // Validate identification and age as integers
         Integer.parseInt(txtIdentification.getText());
     } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(null, "La identificación debe ser números enteros", "Error", JOptionPane.ERROR_MESSAGE);
@@ -189,14 +200,14 @@ public class CTRLcandidate {
     
    if (!txtName.getText().matches("^[a-z A-ZáéíóúÁÉÍÓÚñÑ]+$") || !txtLastName.getText().matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$") || !txtSecondName.getText().matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$") || !txtIPoliticParty.getText().matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$")) {
     JOptionPane.showMessageDialog(null, "El nombre,apellidos y partido deben contener solo letras", "Error", JOptionPane.ERROR_MESSAGE);
-    return; // Detener la operación si hay caracteres no permitidos
+    return;// Stop operation if there are disallowed characters
 }
         
         this.dao.upCandidates(new candidates(this.id, txtName.getText(), txtLastName.getText(), txtSecondName.getText(), Integer.parseInt(txtIdentification.getText()), Integer.parseInt(cbxAgeCand.getSelectedItem().toString()), photo, txtIPoliticParty.getText()));
         this.dao.reorganizarIDsCan();
     }
 
-    //Devuelve una lista de los nombre de los candidTOS
+    // Return a list of candidate names
     public List listCandidateName() {
         List<candidates> candidate = this.dao.readCandidates();
         List<String> NameCandidates = new ArrayList<>();
@@ -206,7 +217,7 @@ public class CTRLcandidate {
         return NameCandidates;
     }
 
-    //Carga los candidatos al combobox
+    // Load candidates into the combobox
     public void loadCandidates(JComboBox cbx) {
         List<String> candidatesName = this.listCandidateName();
         for (Object Name : candidatesName) {
@@ -214,7 +225,7 @@ public class CTRLcandidate {
         }
     }
 
-    //Agrega un voto al candidato seleccionado
+    // Add a vote to the selected candidate
     public void addVote(String name) {
         this.dao.QuantityVoteCandidate(name);
     }

@@ -1,6 +1,5 @@
 package Model;
 
-import Controller.Validations;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,7 +10,8 @@ import javax.swing.JTextField;
 
 public class candidateDAO {
 
-   // Inserta un candidato a la base de datos
+   // Insert a candidate into the database.
+     
     public void createCandidate(candidates cand) {
         DBConnection db = new DBConnection();
         try {
@@ -20,7 +20,7 @@ public class candidateDAO {
             ps.setString(2, cand.getLast_name());
             ps.setString(3, cand.getSecond_name());
             ps.setInt(4, cand.getAge());
-            ps.setBytes(5, cand.getPhoto()); // Guarda la foto como byte
+            ps.setBytes(5, cand.getPhoto()); // Save the photo as bytes
             ps.setString(6, cand.getParty());
             ps.setInt(7, cand.getVotes());
             ps.setInt(8, cand.getId_number());
@@ -32,7 +32,8 @@ public class candidateDAO {
             db.disconnect();
         }
     }
-    //Devuelve la foto mientras si el id es el mismo que netra por parametros
+    // Retrieve the photo bytes of a candidate based on their ID.
+     
     public byte[] bitesPhoto(int id) {
         DBConnection db = new DBConnection();
         byte[] photoBytes = null;
@@ -53,7 +54,8 @@ public class candidateDAO {
         }
         return photoBytes;
     }
-    //Devuelve una foto segun el nombre del candidato
+    //Retrieve the photo bytes of a candidate based on their name.
+     
     public byte[] returnPhoto(String name) {
         DBConnection db = new DBConnection();
         byte[] photoBytes = null;
@@ -74,7 +76,8 @@ public class candidateDAO {
         }
         return photoBytes;
     }
-    //Actualiza un candidato
+    // Update candidate information in the database.
+     
     public void upCandidates(candidates cand) {
         DBConnection db = new DBConnection();
         try {
@@ -96,7 +99,8 @@ public class candidateDAO {
         }
     }
     
-    //Devuelve una lista de candidatos
+    // Retrieve a list of all candidates from the database.
+     
     public List<candidates> readCandidates() {
         DBConnection db = new DBConnection();
         List<candidates> cnadidates = new ArrayList<>();
@@ -123,7 +127,8 @@ public class candidateDAO {
         }
         return cnadidates;
     }
-    //Elimina aun candidato
+    //Delete a candidate from the database based on their ID.
+    
      public void delete(int id) {
         DBConnection db = new DBConnection();
         try {
@@ -137,8 +142,9 @@ public class candidateDAO {
             db.disconnect();
         }
     }
-    //Selecciona la cantidad de votos segun el nombre y le suma uno y lo añade a la DB
-    public List<candidates> QuantityVoteCandidate(String name) {
+     
+    //Select the vote count for a candidate by name, increment it by one, and update it in the database.
+     public List<candidates> QuantityVoteCandidate(String name) {
         DBConnection db = new DBConnection();
         List<candidates> candidatesList = new ArrayList<>();
         String selectSql = "SELECT votes  FROM candidates WHERE name =?";
@@ -164,6 +170,7 @@ public class candidateDAO {
         return candidatesList;
     }
     
+     // Reorganize candidate IDs in the database.
     public void reorganizarIDsCan() {
         DBConnection db = new DBConnection();
 

@@ -1,4 +1,3 @@
-
 package Controller;
 
 
@@ -32,8 +31,7 @@ public class CTRLUser {
         table.setRowSorter(order);
         model.setRowCount(0);
 
-        List<User> users = ud.read(); // Cargar todos los usuarios
-
+        List<User> users = ud.read();// Load all users
         for (User user : users) {
             Object[] row = {
                 user.getId(),
@@ -52,24 +50,30 @@ public class CTRLUser {
             
     //Adds a new user to the database based on the input from text fields.
     public void addUser(JTextField name, JTextField last_name, JTextField secund_name, JTextField id_number, JComboBox age, JTextField address, JTextField password, JComboBox rol_id) {
-        //Validaciones aqui              
+        // Validations here              
         if (name.getText().isEmpty() || last_name.getText().isEmpty() || id_number.getText().isEmpty() || age.getSelectedItem() == null || address.getText().isEmpty() || password.getText().isEmpty()) {
         JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
         return; // Detener la operación si hay campos vacíos
     }
 
+        // Validate the length of the identification number
+    if (id_number.getText().length() < 9) {
+        JOptionPane.showMessageDialog(null, "La identificación debe tener al menos 9 dígitos", "Error", JOptionPane.ERROR_MESSAGE);
+        return;  // Stop operation if the length is less than 9
+    }
+    
     try {
-        // Validar la edad como un número entero
+        // Validate age as an integer
         Integer.parseInt(id_number.getText());
     } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(null, "La identificación debe ser números enteros", "Error", JOptionPane.ERROR_MESSAGE);
-        return; // Detener la operación si hay un error al convertir a entero
+        return;  // Stop operation if there is an error converting to integer
     }
 
-    // Validar que el nombre y apellidos solo contengan letras
+    // Validate that the name and last name contain only letters
     if (!name.getText().matches("^[a-z A-ZáéíóúÁÉÍÓÚñÑ]+$") || !last_name.getText().matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$") || !secund_name.getText().matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$") ) {
     JOptionPane.showMessageDialog(null, "El nombre y apellidos deben contener solo letras", "Error", JOptionPane.ERROR_MESSAGE);
-    return; // Detener la operación si hay caracteres no permitidos
+    return; // Stop operation if there are disallowed characters
 } 
         
         this.ud.create(new User(name.getText(), last_name.getText(), secund_name.getText(), Integer.parseInt(id_number.getText()), Integer.parseInt(age.getSelectedItem().toString()), address.getText(), password.getText(), rol_id.getSelectedItem().toString()));
@@ -80,21 +84,26 @@ public class CTRLUser {
     public void upDatauSERS(JTextField txtNameVot, JTextField txtLastNameVot, JTextField txtSecundNameVot, JTextField txtIdentificationVot, JComboBox cbxAgeVot, JTextField txtAddressVot, JTextField txtPasswordVot, JComboBox rol_id) {
         if (txtNameVot.getText().isEmpty() || txtLastNameVot.getText().isEmpty() || txtIdentificationVot.getText().isEmpty() || cbxAgeVot.getSelectedItem() == null || txtAddressVot.getText().isEmpty() || txtPasswordVot.getText().isEmpty()) {
         JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
-        return; // Detener la operación si hay campos vacíos
+        return; // Stop operation if there are empty fields
     }
 
+        // Validate the length of the identification number
+    if (txtIdentificationVot.getText().length() < 9) {
+        JOptionPane.showMessageDialog(null, "La identificación debe tener al menos 9 dígitos", "Error", JOptionPane.ERROR_MESSAGE);
+        return;  // Stop operation if the length is less than 9
+    }
     try {
-        // Validar la edad como un número entero
+         // Validate age as an integer
         Integer.parseInt(txtIdentificationVot.getText());
     } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(null, "La identificación debe ser un número entero", "Error", JOptionPane.ERROR_MESSAGE);
-        return; // Detener la operación si hay un error al convertir a entero
+        return;  // Stop operation if there is an error converting to integer
     }
 
-    // Validar que el nombre y apellidos solo contengan letras
+    // Validate that the name and last name contain only letters
     if (!txtNameVot.getText().matches("^[a-z A-ZáéíóúÁÉÍÓÚñÑ]+$") || !txtLastNameVot.getText().matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$") || !txtSecundNameVot.getText().matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$") ) {
     JOptionPane.showMessageDialog(null, "El nombre y apellidos deben contener solo letras", "Error", JOptionPane.ERROR_MESSAGE);
-    return; // Detener la operación si hay caracteres no permitidos
+    return;  // Stop operation if there are disallowed characters
 } 
         
         this.ud.update(new User(id,txtNameVot.getText(), txtLastNameVot.getText(), txtSecundNameVot.getText(),  Integer.parseInt(txtIdentificationVot.getText()), Integer.parseInt(cbxAgeVot.getSelectedItem().toString()), txtAddressVot.getText(), txtPasswordVot.getText(), rol_id.getSelectedItem().toString()));
@@ -102,13 +111,13 @@ public class CTRLUser {
         
     }   
     
-    //Deletes the current user from the database and reorganizes user IDs.
+    // Deletes the current user from the database and reorganizes user IDs.
     public void deleteUser(){
         this.ud.delete(this.id);
         this.ud.reorganizarIDs();
     }
     
-    //Populates input fields and combo boxes with data from the selected row in the JTable.
+    // Populates input fields and combo boxes with data from the selected row in the JTable.
     public void selectedRow(JTable table, JTextField name, JTextField last_name, JTextField secund_name, JTextField id_number, JComboBox age, JTextField address, JTextField password, JComboBox rol_id) {
         try {
             int row = table.getSelectedRow();
@@ -132,7 +141,7 @@ public class CTRLUser {
         }
     }
     
-    //Clears the content of the provided text fields
+    // Clears the content of the provided text fields
     public void clearFields(JTextField name, JTextField last_name, JTextField secund_name, JTextField id_number, JTextField address, JTextField password) {
         name.setText("");
         last_name.setText("");
