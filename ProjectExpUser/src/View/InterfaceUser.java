@@ -9,18 +9,27 @@ import javax.swing.JButton;
 
 
 public class InterfaceUser extends javax.swing.JFrame {
+    // Controllers for candidates, graphics, and interface methods
+    
     CTRLcandidate ctrlCandidates = new CTRLcandidate();
     CTRLgraphic CTRLgraphic = new CTRLgraphic();
     CTRLinterfaceMethods ctrInterface= new CTRLinterfaceMethods();
     
-
+    
+    //Creates a new instance of the InterfaceUser JFrame.     
     public InterfaceUser() {
+         // Set the frame to undecorated and initialize components       
         this.setUndecorated(true);
         initComponents();
+        // Set the frame location to the center of the screen
         setLocationRelativeTo(null);
+         // Load candidates into the combo box        
         this.ctrlCandidates.loadCandidates(cbxCandidates);
         
     }
+    
+    // Returns the "Vote" button from the interface.
+     
      public JButton btnVote() {
         return btnVoto;
     }

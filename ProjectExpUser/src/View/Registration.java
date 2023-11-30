@@ -1,4 +1,3 @@
-
 package View;
 
 import Controller.CTRLUser;
@@ -8,19 +7,29 @@ public class Registration extends javax.swing.JFrame {
 
     CTRLUser CU = new CTRLUser();
  
+    //Creates a new instance of the Registration JFrame.
+     
     public Registration() {
+         // Set the frame to undecorated and initialize components
         this.setUndecorated(true);
         initComponents();
+        // Populate roles in the combo box
         this.cbxRoles();
+        // Set the frame location to the center of the screen
         setLocationRelativeTo(null);
     }
 
+    //Populates the roles combo box in the registration interface.
+     
     private void cbxRoles() {
-        boolean isAdmin = false; // Puedes ajustar este valor según tus necesidades.
+        // Set roles for user registration
+        boolean isAdmin = false; // You can adjust this value according to your needs.
         boolean isVotante = true;
         this.CU.loadRole(cbxRoles, isAdmin, isVotante);
     }
     
+    //Clears input fields in the registration interface.
+     
     public void clear (){   
         this.CU.clearFields(txtName, txtLast_name, txtSecundName, txtIdentification1, txtAdrdres, txtPassword);
         }   

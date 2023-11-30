@@ -1,4 +1,3 @@
-
 package View;
 
 import Controller.CTRLUser;
@@ -11,6 +10,7 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 
 
+ // The Administrator class represents the main JFrame for the administrator interface.
  
 public class Administrator extends javax.swing.JFrame {
     CTRLcandidate ctrlCandidate = new CTRLcandidate();
@@ -19,33 +19,42 @@ public class Administrator extends javax.swing.JFrame {
     CTRLperiod CP= new CTRLperiod();
     InterfaceUser InterFaceU = new InterfaceUser();
     CTRLinterfaceMethods ctrInterface= new CTRLinterfaceMethods();
-    /**
-     * Creates new form Administrator
-     */
+    //Creates new form Administrator
+     
     public Administrator() {
+        // Set the frame location to the center of the screen
         this.setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
+        // Load initial data into tables and user interface elements
         this.upDataTable();
         this.cbxRoles();
         this.loadDataUsers();
+         // Set initial visibility for a text field
         txtAdrresPhoto.setVisible(false);
         
     }
+    
+    //Updates the candidate data table in the interface.
+     
     public void upDataTable(){
        this.ctrlCandidate.loadDataCandidates(tblCandidation);
     }
     
+    // Loads user data into the voters' table in the interface.
+     
     private void loadDataUsers() {
         this.CU.loadDataUser(tblVotantes);
     }
     
+    // Populates the roles combo box in the interface
     private void cbxRoles() {
         boolean isAdmin = true; 
         boolean isVotante = true;
         this.CU.loadRole(cbxRolVot, isAdmin, isVotante);
     }
     
+    // Clears input fields in the user interface.
     public void clear (){   
         this.CU.clearFields(txtNameVot, txtLastNameVot, txtSecundNameVot, txtIdentificationVot, txtAddressVot, txtPasswordVot);
         }

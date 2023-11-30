@@ -1,18 +1,21 @@
-
 package View;
 
 import Controller.CTRLrole;
 
-
+// The Login class represents the JFrame for the login interface.
+ 
 public class Login extends javax.swing.JFrame {
+    // Instances of other frames for administrator, user interface, and registration
     Administrator adm = new Administrator();
     InterfaceUser user = new InterfaceUser();
     Registration rg = new Registration();
     CTRLrole ctrlRole= new CTRLrole();
-  
+  //Creates a new instance of the Login JFrame.
     public Login() {
+        // Set the frame to undecorated and initialize components
         this.setUndecorated(true);
         initComponents();
+        // Set the frame location to the center of the screen
          setLocationRelativeTo(null);
     }
 
